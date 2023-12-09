@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Your Workouts</string>
+
+    <!-- Navigation related strings -->
+    <string name="home_nav">Home</string>
+    <string name="schedule_nav">Schedule</string>
+    <string name="exercise_nav">Exercises</string>
+    <string name="createExercise_nav">Create Exercise</string>
+
+    <!-- Screen Titles -->
+    <string name="schedule_screen_title">Your Schedule</string>
+    <string name="exercise_screen_title">Your Exercises</string>
+    <string name="create_exercise_screen_title">Create Exercise</string>
+
+    <!-- Button Texts -->
+    <string name="save_btn">Save</string>
+    <string name="cancel_btn">Cancel</string>
+
 </resources>
