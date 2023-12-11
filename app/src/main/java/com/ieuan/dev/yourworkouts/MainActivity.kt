@@ -1,7 +1,6 @@
 package com.ieuan.dev.yourworkouts
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
-import com.ieuan.dev.yourworkouts.model.data.WorkoutDatabase
+import com.ieuan.dev.yourworkouts.model.data.WorkoutRoomDatabase
 import com.ieuan.dev.yourworkouts.ui.exercise.CreateExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.ExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.home.HomeScreen
@@ -22,18 +21,10 @@ import com.ieuan.dev.yourworkouts.ui.theme.YourWorkoutsTheme
 
 val TAG: String = "TAG_SC"
 
-lateinit var database: WorkoutDatabase
-
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        database = Room.databaseBuilder(
-            applicationContext,
-            WorkoutDatabase::class.java,
-            "workout_db"
-        ).build()
 
         setContent {
             YourWorkoutsTheme {

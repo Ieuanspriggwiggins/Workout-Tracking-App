@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "exercise")
 data class Exercise(
-    val exerciseName: String = "",
+    var exerciseName: String = "",
     val numOfSets: Int = 0,
     val numOfReps: Int = 0,
     val exerciseWeight: Float = 0f,
