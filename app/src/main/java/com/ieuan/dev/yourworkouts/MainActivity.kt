@@ -1,6 +1,7 @@
 package com.ieuan.dev.yourworkouts
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,27 +13,28 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
-import com.ieuan.dev.yourworkouts.model.data.WorkoutRoomDatabase
+import com.ieuan.dev.yourworkouts.model.data.WorkoutDatabase
 import com.ieuan.dev.yourworkouts.ui.exercise.CreateExerciseScreen
-import com.ieuan.dev.yourworkouts.ui.exercise.CreateExerciseViewModel
 import com.ieuan.dev.yourworkouts.ui.exercise.ExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.home.HomeScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.ScheduleScreen
 import com.ieuan.dev.yourworkouts.ui.theme.YourWorkoutsTheme
 
-class MainActivity : ComponentActivity() {
+val TAG: String = "TAG_SC"
 
-    //Create the database used by the app
-    private val db by lazy {
-        Room.databaseBuilder(
-            applicationContext,
-            WorkoutRoomDatabase::class.java,
-            "workout_db"
-        ).build()
-    }
+lateinit var database: WorkoutDatabase
+
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        database = Room.databaseBuilder(
+            applicationContext,
+            WorkoutDatabase::class.java,
+            "workout_db"
+        ).build()
+
         setContent {
             YourWorkoutsTheme {
                 // A surface container using the 'background' color from the theme
@@ -54,10 +56,7 @@ class MainActivity : ComponentActivity() {
             composable("home") { HomeScreen(navController = navController)}
             composable("schedule") {ScheduleScreen(navController = navController)}
             composable("exercises") {ExerciseScreen(navController = navController)}
-            composable("createExercise") { CreateExerciseScreen(
-                navController = navController,
-                CreateExerciseViewModel(db.exerciseDao)
-            ) }
+            composable("createExercise") { CreateExerciseScreen(navController = navController) }
         }
     }
 }

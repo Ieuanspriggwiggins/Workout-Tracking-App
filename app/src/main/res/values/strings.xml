@@ -15,5 +15,17 @@
     <!-- Button Texts -->
     <string name="save_btn">Save</string>
     <string name="cancel_btn">Cancel</string>
+    <string name="upload_img_btn">Upload Image</string>
+
+    <!-- Input Labels -->
+    <string name="exercise_name_input_label">Exercise Name</string>
+    <string name="exercise_set_count_input_label">Number of Sets</string>
+    <string name="is_drop_set_label">Drop-Set:</string>
+    <string name="exercise_rep_count_input_label">Number of Reps</string>
+    <string name="exercise_weight_label">Exercise Weight (kg)</string>
+
+    <string name="exercise_drop_set_first_weight_label">Drop-Set First Weight</string>
+    <string name="exercise_drop_set_second_weight_label">Drop-Set Second Weight</string>
+    <string name="exercise_drop_set_third_weight_label">Drop-Set Third Weight</string>
 
 </resources>
