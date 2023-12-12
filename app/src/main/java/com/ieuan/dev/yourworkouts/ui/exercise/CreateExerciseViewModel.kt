@@ -2,8 +2,6 @@ package com.ieuan.dev.yourworkouts.ui.exercise
 
 import android.app.Application
 import android.net.Uri
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -39,8 +37,8 @@ class CreateExerciseViewModel(application: Application): AndroidViewModel(applic
      */
     private fun dataStateToExerciseEntity(exerciseData: ExerciseData): Exercise {
         //Validate the data in dataState
-        val defaultIntValue: Int = 0
-        val defaultFloatValue: Float = 0f
+        val defaultIntValue = 0
+        val defaultFloatValue = 0f
         return Exercise(
             exerciseName = exerciseData.exerciseName,
             numOfSets = exerciseData.numberOfSets.toIntOrNull() ?: defaultIntValue,
