@@ -1,7 +1,9 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
 import android.app.Application
-import androidx.compose.runtime.MutableState
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -17,10 +19,14 @@ class CreateExerciseViewModel(application: Application): AndroidViewModel(applic
 
     var dataState by mutableStateOf(ExerciseData())
 
+    //Store the image uri for the image given by the user
+    var exerciseImageUri = mutableStateOf<Uri?>(null)
+
     /**
      * Submits the exercises to the database
      */
     fun submitExercise() {
+
         viewModelScope.launch{
             exerciseRepository.insert(dataStateToExerciseEntity(dataState))
         }
@@ -44,6 +50,7 @@ class CreateExerciseViewModel(application: Application): AndroidViewModel(applic
             dropSetFirstWeight = exerciseData.exerciseDropSetWeightOne.toFloatOrNull() ?: defaultFloatValue,
             dropSetSecondWeight = exerciseData.exerciseDropSetWeightTwo.toFloatOrNull() ?: defaultFloatValue,
             dropSetThirdWeight = exerciseData.exerciseDropSetWeightThree.toFloatOrNull() ?: defaultFloatValue,
+            exerciseImage = exerciseImageUri.value.toString()
         )
 
     }
@@ -58,7 +65,6 @@ class CreateExerciseViewModel(application: Application): AndroidViewModel(applic
 
 }
 
-
 data class ExerciseData(
     var exerciseName: String = "",
     var numberOfSets: String = "",
@@ -68,5 +74,4 @@ data class ExerciseData(
     var exerciseDropSetWeightOne: String = "",
     var exerciseDropSetWeightTwo: String = "",
     var exerciseDropSetWeightThree: String = "",
-    var exerciseImageUri: String = "",
 )

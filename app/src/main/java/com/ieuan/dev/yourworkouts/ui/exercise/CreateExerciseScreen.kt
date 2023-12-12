@@ -1,5 +1,7 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +26,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
@@ -34,6 +37,13 @@ fun CreateExerciseScreen(
 ) {
 
     val dataState = viewModel.dataState
+
+    val imageGallery = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+        onResult = {
+            viewModel.exerciseImageUri.value = it
+        }
+    )
 
     FormScreenScaffold(
         navController = navController,
@@ -89,7 +99,7 @@ fun CreateExerciseScreen(
                 },
                 value = dataState.numberOfSets,
                 onValueChange = {
-                    if(viewModel.isValidInt(it))
+                    if(viewModel.isValidInt(it) || it.isEmpty()) //
                         viewModel.dataState = dataState.copy(numberOfSets = it)
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(
@@ -102,11 +112,20 @@ fun CreateExerciseScreen(
 
             //TODO: add functionality for image
             Button(
-                onClick = {  },
+                onClick = {
+                    imageGallery.launch("image/*")
+                },
                 modifier = Modifier
                     .padding(bottom = 24.dp)
             ) {
                 Text(text = stringResource(R.string.upload_img_btn))
+            }
+
+            viewModel.exerciseImageUri.value?.let{
+                AsyncImage(
+                    model = viewModel.exerciseImageUri.value,
+                    contentDescription = null,
+                )
             }
 
             /**
@@ -135,7 +154,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.numberOfReps,
                     onValueChange = {
-                        if(viewModel.isValidInt(it))
+                        if(viewModel.isValidInt(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(numberOfReps = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -152,7 +171,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.exerciseWeight,
                     onValueChange = {
-                        if(viewModel.isValidFloat(it))
+                        if(viewModel.isValidFloat(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(exerciseWeight = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -170,7 +189,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.exerciseDropSetWeightOne,
                     onValueChange = {
-                        if(viewModel.isValidFloat(it))
+                        if(viewModel.isValidFloat(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(exerciseDropSetWeightOne = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -187,8 +206,8 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.exerciseDropSetWeightTwo,
                     onValueChange = {
-                        if(viewModel.isValidFloat(it))
-                            viewModel.dataState = dataState.copy(exerciseDropSetWeightThree = it)
+                        if(viewModel.isValidFloat(it) || it.isEmpty())
+                            viewModel.dataState = dataState.copy(exerciseDropSetWeightTwo = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Number
@@ -204,7 +223,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.exerciseDropSetWeightThree,
                     onValueChange = {
-                        if(viewModel.isValidFloat(it))
+                        if(viewModel.isValidFloat(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(exerciseDropSetWeightThree = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
