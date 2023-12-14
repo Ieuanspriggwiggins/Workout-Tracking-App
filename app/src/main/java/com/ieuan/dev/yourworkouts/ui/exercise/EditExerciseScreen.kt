@@ -49,9 +49,9 @@ fun EditExerciseScreen(
     val dataState = viewModel.dataState
 
     val imageGallery = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent(),
+        contract = ActivityResultContracts.OpenDocument(),
         onResult = {
-            viewModel.exerciseImageUri = it
+            viewModel.exerciseImageUri.value = it
         }
     )
 
@@ -150,7 +150,7 @@ fun EditExerciseScreen(
             //TODO: add functionality for image
             Button(
                 onClick = {
-                    imageGallery.launch("image/*")
+                    imageGallery.launch(arrayOf("image/*"))
                 },
                 modifier = Modifier
                     .padding(bottom = 24.dp)
@@ -158,9 +158,9 @@ fun EditExerciseScreen(
                 Text(text = stringResource(R.string.upload_img_btn))
             }
 
-            viewModel.exerciseImageUri?.let{
+            viewModel.exerciseImageUri.value?.let{
                 AsyncImage(
-                    model = viewModel.exerciseImageUri,
+                    model = viewModel.exerciseImageUri.value,
                     contentDescription = null,
                 )
             }

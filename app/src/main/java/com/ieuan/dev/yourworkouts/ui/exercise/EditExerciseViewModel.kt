@@ -1,6 +1,7 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
 import android.app.Application
+import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +23,8 @@ class EditExerciseViewModel(
     savedStateHandle: SavedStateHandle
 ): AndroidViewModel(application) {
     private val exerciseRepository: ExerciseRepository = ExerciseRepository(application)
+    val contentResolver = application.contentResolver
+    val flags: Int = Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
 
     private val exerciseId: Int = checkNotNull(savedStateHandle["exerciseId"]);
 
@@ -29,7 +32,7 @@ class EditExerciseViewModel(
 
     var dataState by mutableStateOf(ExerciseData())
 
-    var exerciseImageUri by mutableStateOf<Uri?>(null)
+    var exerciseImageUri = mutableStateOf<Uri?>(null)
 
     init {
         viewModelScope.launch{
@@ -45,13 +48,14 @@ class EditExerciseViewModel(
                 exerciseDropSetWeightTwo = exerciseObj.dropSetSecondWeight.toString(),
                 exerciseDropSetWeightThree = exerciseObj.dropSetThirdWeight.toString()
             )
-            exerciseImageUri = exerciseObj.exerciseImage.toUri()
+            exerciseImageUri.value = exerciseObj.exerciseImage.toUri()
         }
     }
 
     fun updateExercise() {
-        val exercise = dataStateToExerciseEntity(dataState, exerciseImageUri)
+        val exercise = dataStateToExerciseEntity(dataState, exerciseImageUri.value)
         exercise.id = exerciseId
+        exerciseImageUri.value?.let{contentResolver.takePersistableUriPermission(it, flags)}
         viewModelScope.launch{
             exerciseRepository.update(exercise)
         }

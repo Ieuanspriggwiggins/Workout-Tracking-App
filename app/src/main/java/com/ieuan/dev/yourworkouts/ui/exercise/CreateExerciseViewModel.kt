@@ -16,6 +16,8 @@ import kotlinx.coroutines.launch
 
 class CreateExerciseViewModel(application: Application): AndroidViewModel(application) {
     private val exerciseRepository: ExerciseRepository = ExerciseRepository(application)
+    val contentResolver = application.contentResolver
+    val flags: Int = Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
 
     var dataState by mutableStateOf(ExerciseData())
 
@@ -26,6 +28,9 @@ class CreateExerciseViewModel(application: Application): AndroidViewModel(applic
      * Submits the exercises to the database
      */
     fun submitExercise() {
+
+        exerciseImageUri.value?.let{contentResolver.takePersistableUriPermission(it, flags)}
+
         viewModelScope.launch {
             exerciseRepository.insert(dataStateToExerciseEntity(dataState, exerciseImageUri.value))
         }

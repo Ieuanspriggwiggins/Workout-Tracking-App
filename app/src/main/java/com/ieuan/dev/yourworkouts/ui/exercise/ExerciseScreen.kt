@@ -1,5 +1,7 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
+import android.content.Intent
+import android.provider.MediaStore
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -23,6 +25,7 @@ fun ExerciseScreen(
     navController: NavController,
     viewModel: ExerciseViewModel = viewModel()
 ) {
+
     val exerciseList by viewModel.exercises.collectAsState(listOf())
 
     TopLevelScaffold(
