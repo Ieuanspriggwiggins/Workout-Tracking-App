@@ -1,7 +1,5 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -10,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -42,7 +39,10 @@ fun ExerciseScreen(
                 .verticalScroll(state = rememberScrollState())
         ){
             exerciseList.forEach{exercise ->
-                ExerciseCard(exercise)
+                ExerciseCard(exercise = exercise) {
+                    val id: Int = exercise.id
+                    navController.navigate("editExercise/$id")
+                }
             }
         }
     }

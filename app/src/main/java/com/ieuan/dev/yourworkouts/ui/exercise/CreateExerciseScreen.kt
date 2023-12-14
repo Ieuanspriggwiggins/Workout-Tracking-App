@@ -1,6 +1,5 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
-import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
@@ -45,12 +44,6 @@ fun CreateExerciseScreen(
             viewModel.exerciseImageUri.value = it
         } )
 
-//    val imageGallery = rememberLauncherForActivityResult(
-//        contract = ActivityResultContracts.GetContent(),
-//        onResult = {
-//            viewModel.exerciseImageUri.value = it
-//        }
-//    )
 
     FormScreenScaffold(
         navController = navController,

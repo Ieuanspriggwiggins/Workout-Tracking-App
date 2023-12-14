@@ -8,10 +8,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.ieuan.dev.yourworkouts.model.data.Exercise
 import com.ieuan.dev.yourworkouts.ui.exercise.CreateExerciseScreen
+import com.ieuan.dev.yourworkouts.ui.exercise.EditExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.ExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.home.HomeScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.ScheduleScreen
@@ -47,6 +51,10 @@ class MainActivity : ComponentActivity() {
             composable("schedule") {ScheduleScreen(navController = navController)}
             composable("exercises") {ExerciseScreen(navController = navController)}
             composable("createExercise") { CreateExerciseScreen(navController = navController) }
+            composable(
+                route = "editExercise/{exerciseId}",
+                arguments = listOf(navArgument("exerciseId"){type = NavType.IntType})
+            ) {EditExerciseScreen(navController = navController)}
         }
     }
 }

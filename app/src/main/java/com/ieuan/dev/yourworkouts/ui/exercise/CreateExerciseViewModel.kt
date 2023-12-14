@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.ieuan.dev.yourworkouts.model.data.Exercise
+import com.ieuan.dev.yourworkouts.model.data.ExerciseData
 import com.ieuan.dev.yourworkouts.model.data.ExerciseRepository
 import kotlinx.coroutines.launch
 
@@ -24,8 +25,7 @@ class CreateExerciseViewModel(application: Application): AndroidViewModel(applic
      * Submits the exercises to the database
      */
     fun submitExercise() {
-
-        viewModelScope.launch{
+        viewModelScope.launch {
             exerciseRepository.insert(dataStateToExerciseEntity(dataState))
         }
     }
@@ -45,9 +45,12 @@ class CreateExerciseViewModel(application: Application): AndroidViewModel(applic
             numOfReps = exerciseData.numberOfReps.toIntOrNull() ?: defaultIntValue,
             exerciseWeight = exerciseData.exerciseWeight.toFloatOrNull() ?: defaultFloatValue,
             isDropSet = exerciseData.isDropSetEnabled,
-            dropSetFirstWeight = exerciseData.exerciseDropSetWeightOne.toFloatOrNull() ?: defaultFloatValue,
-            dropSetSecondWeight = exerciseData.exerciseDropSetWeightTwo.toFloatOrNull() ?: defaultFloatValue,
-            dropSetThirdWeight = exerciseData.exerciseDropSetWeightThree.toFloatOrNull() ?: defaultFloatValue,
+            dropSetFirstWeight = exerciseData.exerciseDropSetWeightOne.toFloatOrNull()
+                ?: defaultFloatValue,
+            dropSetSecondWeight = exerciseData.exerciseDropSetWeightTwo.toFloatOrNull()
+                ?: defaultFloatValue,
+            dropSetThirdWeight = exerciseData.exerciseDropSetWeightThree.toFloatOrNull()
+                ?: defaultFloatValue,
             exerciseImage = exerciseImageUri.value.toString()
         )
 
@@ -62,14 +65,3 @@ class CreateExerciseViewModel(application: Application): AndroidViewModel(applic
     }
 
 }
-
-data class ExerciseData(
-    var exerciseName: String = "",
-    var numberOfSets: String = "",
-    var numberOfReps: String = "",
-    var exerciseWeight: String = "",
-    var isDropSetEnabled: Boolean = false,
-    var exerciseDropSetWeightOne: String = "",
-    var exerciseDropSetWeightTwo: String = "",
-    var exerciseDropSetWeightThree: String = "",
-)

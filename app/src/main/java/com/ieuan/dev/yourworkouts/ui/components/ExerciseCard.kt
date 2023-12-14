@@ -22,17 +22,15 @@ import com.ieuan.dev.yourworkouts.model.data.Exercise
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExerciseCard(
-    exercise: Exercise
+    exercise: Exercise,
+    onClick: () -> Unit,
 ){
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 20.dp),
         shape = RoundedCornerShape(4.dp),
-        onClick = {
-
-        }
+        onClick = onClick
     ){
         Column(
             modifier = Modifier

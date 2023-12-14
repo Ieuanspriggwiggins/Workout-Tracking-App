@@ -6,11 +6,13 @@
     <string name="schedule_nav">Schedule</string>
     <string name="exercise_nav">Exercises</string>
     <string name="createExercise_nav">Create Exercise</string>
+    <string name="editExercise_nav">Edit Exercise</string>
 
     <!-- Screen Titles -->
     <string name="schedule_screen_title">Your Schedule</string>
     <string name="exercise_screen_title">Your Exercises</string>
     <string name="create_exercise_screen_title">Create Exercise</string>
+    <string name="edit_exercise_screen_title">Edit Exercise</string>
 
     <!-- Button Texts -->
     <string name="save_btn">Save</string>
