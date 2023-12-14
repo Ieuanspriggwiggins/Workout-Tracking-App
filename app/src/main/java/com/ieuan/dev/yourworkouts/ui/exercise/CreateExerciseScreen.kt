@@ -28,6 +28,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.ieuan.dev.yourworkouts.R
+import com.ieuan.dev.yourworkouts.model.data.isValidFloat
+import com.ieuan.dev.yourworkouts.model.data.isValidInt
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
 @Composable
@@ -99,7 +101,7 @@ fun CreateExerciseScreen(
                 },
                 value = dataState.numberOfSets,
                 onValueChange = {
-                    if(viewModel.isValidInt(it) || it.isEmpty()) //
+                    if(isValidInt(it) || it.isEmpty()) //
                         viewModel.dataState = dataState.copy(numberOfSets = it)
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(
@@ -154,7 +156,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.numberOfReps,
                     onValueChange = {
-                        if(viewModel.isValidInt(it) || it.isEmpty())
+                        if(isValidInt(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(numberOfReps = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -171,7 +173,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.exerciseWeight,
                     onValueChange = {
-                        if(viewModel.isValidFloat(it) || it.isEmpty())
+                        if(isValidFloat(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(exerciseWeight = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -189,7 +191,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.exerciseDropSetWeightOne,
                     onValueChange = {
-                        if(viewModel.isValidFloat(it) || it.isEmpty())
+                        if(isValidFloat(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(exerciseDropSetWeightOne = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -206,7 +208,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.exerciseDropSetWeightTwo,
                     onValueChange = {
-                        if(viewModel.isValidFloat(it) || it.isEmpty())
+                        if(isValidFloat(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(exerciseDropSetWeightTwo = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
@@ -223,7 +225,7 @@ fun CreateExerciseScreen(
                     },
                     value = dataState.exerciseDropSetWeightThree,
                     onValueChange = {
-                        if(viewModel.isValidFloat(it) || it.isEmpty())
+                        if(isValidFloat(it) || it.isEmpty())
                             viewModel.dataState = dataState.copy(exerciseDropSetWeightThree = it)
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(

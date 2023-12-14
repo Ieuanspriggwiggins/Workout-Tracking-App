@@ -1,5 +1,6 @@
 package com.ieuan.dev.yourworkouts
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,7 +29,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             YourWorkoutsTheme {
                 // A surface container using the 'background' color from the theme

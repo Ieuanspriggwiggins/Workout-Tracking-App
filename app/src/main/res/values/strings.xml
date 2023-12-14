@@ -18,6 +18,7 @@
     <string name="save_btn">Save</string>
     <string name="cancel_btn">Cancel</string>
     <string name="upload_img_btn">Upload Image</string>
+    <string name="delete_exercise_btn">Delete Exercise</string>
 
     <!-- Input Labels -->
     <string name="exercise_name_input_label">Exercise Name</string>

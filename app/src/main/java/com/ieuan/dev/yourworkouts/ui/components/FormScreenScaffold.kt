@@ -39,13 +39,17 @@ fun FormScreenScaffold(
     navController: NavController,
     formTitle: String,
     onSaveClick: () -> Unit = {},
-    content: @Composable () -> Unit
+    actions: @Composable () -> Unit = {},
+    content: @Composable () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(formTitle)
+                },
+                actions = {
+                    actions()
                 },
                 navigationIcon = {
                     IconButton(onClick = {navController.popBackStack()}) {
