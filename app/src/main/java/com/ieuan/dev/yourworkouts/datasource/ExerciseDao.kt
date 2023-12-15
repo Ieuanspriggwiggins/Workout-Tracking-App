@@ -1,4 +1,4 @@
-package com.ieuan.dev.yourworkouts.model.data
+package com.ieuan.dev.yourworkouts.datasource
 
 import androidx.room.Dao
 import androidx.room.Delete

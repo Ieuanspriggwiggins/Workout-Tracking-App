@@ -28,6 +28,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.ieuan.dev.yourworkouts.R
+import com.ieuan.dev.yourworkouts.model.CreateExerciseViewModel
 import com.ieuan.dev.yourworkouts.model.data.isValidFloat
 import com.ieuan.dev.yourworkouts.model.data.isValidInt
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold

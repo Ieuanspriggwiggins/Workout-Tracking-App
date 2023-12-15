@@ -1,7 +1,5 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
-import android.content.Intent
-import android.provider.MediaStore
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.R
+import com.ieuan.dev.yourworkouts.model.ExerciseViewModel
 import com.ieuan.dev.yourworkouts.ui.components.ExerciseCard
 import com.ieuan.dev.yourworkouts.ui.components.TopLevelScaffold
 import com.ieuan.dev.yourworkouts.ui.navigation.Screen

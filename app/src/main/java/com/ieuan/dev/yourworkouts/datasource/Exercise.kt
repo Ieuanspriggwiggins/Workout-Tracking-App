@@ -1,4 +1,4 @@
-package com.ieuan.dev.yourworkouts.model.data
+package com.ieuan.dev.yourworkouts.datasource
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

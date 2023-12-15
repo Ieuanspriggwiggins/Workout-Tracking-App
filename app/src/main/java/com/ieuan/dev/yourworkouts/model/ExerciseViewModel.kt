@@ -1,10 +1,9 @@
-package com.ieuan.dev.yourworkouts.ui.exercise
+package com.ieuan.dev.yourworkouts.model
 
 import android.app.Application
-import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
-import com.ieuan.dev.yourworkouts.model.data.Exercise
-import com.ieuan.dev.yourworkouts.model.data.ExerciseRepository
+import com.ieuan.dev.yourworkouts.datasource.Exercise
+import com.ieuan.dev.yourworkouts.datasource.ExerciseRepository
 import kotlinx.coroutines.flow.Flow
 
 class ExerciseViewModel(application: Application): AndroidViewModel(application) {

@@ -1,4 +1,4 @@
-package com.ieuan.dev.yourworkouts.ui.exercise
+package com.ieuan.dev.yourworkouts.model
 
 import android.app.Application
 import android.content.Intent
@@ -9,7 +9,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.ieuan.dev.yourworkouts.model.data.ExerciseData
-import com.ieuan.dev.yourworkouts.model.data.ExerciseRepository
+import com.ieuan.dev.yourworkouts.datasource.ExerciseRepository
 import com.ieuan.dev.yourworkouts.model.data.dataStateToExerciseEntity
 import kotlinx.coroutines.launch
 

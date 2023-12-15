@@ -1,4 +1,4 @@
-package com.ieuan.dev.yourworkouts.model.data
+package com.ieuan.dev.yourworkouts.datasource
 
 import android.content.Context
 import androidx.room.Database

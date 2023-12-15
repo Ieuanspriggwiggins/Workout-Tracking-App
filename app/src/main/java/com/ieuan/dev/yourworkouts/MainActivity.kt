@@ -1,6 +1,5 @@
 package com.ieuan.dev.yourworkouts
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,7 +13,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.ieuan.dev.yourworkouts.model.data.Exercise
 import com.ieuan.dev.yourworkouts.ui.exercise.CreateExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.EditExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.ExerciseScreen

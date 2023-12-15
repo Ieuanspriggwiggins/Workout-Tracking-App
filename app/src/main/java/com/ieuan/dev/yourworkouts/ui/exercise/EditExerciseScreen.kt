@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -37,6 +36,7 @@ import androidx.navigation.NavController
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.ieuan.dev.yourworkouts.R
+import com.ieuan.dev.yourworkouts.model.EditExerciseViewModel
 import com.ieuan.dev.yourworkouts.model.data.isValidFloat
 import com.ieuan.dev.yourworkouts.model.data.isValidInt
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold

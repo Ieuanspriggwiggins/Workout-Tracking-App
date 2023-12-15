@@ -1,4 +1,4 @@
-package com.ieuan.dev.yourworkouts.ui.exercise
+package com.ieuan.dev.yourworkouts.model
 
 import android.app.Application
 import android.content.Intent
@@ -10,9 +10,9 @@ import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.ieuan.dev.yourworkouts.model.data.Exercise
+import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.model.data.ExerciseData
-import com.ieuan.dev.yourworkouts.model.data.ExerciseRepository
+import com.ieuan.dev.yourworkouts.datasource.ExerciseRepository
 import com.ieuan.dev.yourworkouts.model.data.dataStateToExerciseEntity
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -26,7 +26,7 @@ class EditExerciseViewModel(
     val contentResolver = application.contentResolver
     val flags: Int = Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
 
-    private val exerciseId: Int = checkNotNull(savedStateHandle["exerciseId"]);
+    private val exerciseId: Int = checkNotNull(savedStateHandle["exerciseId"])
 
     private var exerciseObj: Exercise = Exercise()
 

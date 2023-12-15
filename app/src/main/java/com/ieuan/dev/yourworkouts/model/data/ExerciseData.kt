@@ -1,6 +1,7 @@
 package com.ieuan.dev.yourworkouts.model.data
 
 import android.net.Uri
+import com.ieuan.dev.yourworkouts.datasource.Exercise
 
 data class ExerciseData(
     var exerciseName: String = "",
