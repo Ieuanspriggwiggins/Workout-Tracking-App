@@ -1,6 +1,5 @@
 package com.ieuan.dev.yourworkouts.ui.components
 
-import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,15 +36,12 @@ fun ExerciseCard(
                 text = exercise.exerciseName,
                 fontSize = 18.sp
             )
-            val uri: Uri = Uri.parse(exercise.exerciseImage)
 
+            AsyncImage(
+                model = Uri.parse(exercise.exerciseImage),
+                contentDescription = exercise.exerciseName
+            )
 
-            if(exercise.exerciseImage.isNotEmpty()){
-                AsyncImage(
-                    model = Uri.parse(exercise.exerciseImage),
-                    contentDescription = exercise.exerciseName
-                )
-            }
         }
     }
 }
