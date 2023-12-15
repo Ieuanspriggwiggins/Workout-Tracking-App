@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
@@ -36,10 +37,14 @@ class ExerciseViewModel(
 
     var exerciseImageUri = mutableStateOf<Uri?>(null)
 
+    var isFieldEmptyError by mutableStateOf(false)
+
+
     /**
      * For submitting a new exercise on the create exercise screen
      */
     fun submitExercise() {
+        checkExerciseSubmission()
         getUriPermission()
         viewModelScope.launch {
             exerciseRepository.insert(dataStateToExerciseEntity(dataState, exerciseImageUri.value))
@@ -86,7 +91,32 @@ class ExerciseViewModel(
         }
     }
 
+    /**
+     * Returns whether the input values are valid or not
+     */
+
+    fun checkExerciseSubmission(){
+        //Check if data matches required fields for non drop-set exercise
+        if(!dataState.isDropSetEnabled){
+            if(dataState.exerciseName.isEmpty() ||
+                dataState.numberOfSets.isEmpty() ||
+                dataState.numberOfReps.isEmpty() ||
+                dataState.exerciseWeight.isEmpty()
+            ){ isFieldEmptyError = true }
+        }
+        //If the exercise is a drop set
+        else{
+            if(dataState.exerciseName.isEmpty() ||
+                dataState.numberOfSets.isEmpty() ||
+                dataState.exerciseDropSetWeightOne.isEmpty() ||
+                dataState.exerciseDropSetWeightTwo.isEmpty() ||
+                dataState.exerciseDropSetWeightThree.isEmpty()
+            ){ isFieldEmptyError = true }
+        }
+    }
+
     fun updateExercise() {
+        checkExerciseSubmission()
         getUriPermission()
         viewModelScope.launch {
             val exercise: Exercise = dataStateToExerciseEntity(dataState, exerciseImageUri.value)

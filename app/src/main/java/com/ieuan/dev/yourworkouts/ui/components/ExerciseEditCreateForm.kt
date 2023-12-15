@@ -52,12 +52,6 @@ fun ExerciseEditCreateForm(
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .verticalScroll(rememberScrollState()),
     ){
-        /**
-         * Exercise name entry
-         */
-        /**
-         * Exercise name entry
-         */
         OutlinedTextField(
             label = {
                 Text(text = stringResource(R.string.exercise_name_input_label))

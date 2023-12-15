@@ -20,6 +20,11 @@
     <string name="upload_img_btn">Upload Image</string>
     <string name="delete_exercise_btn">Delete Exercise</string>
 
+    <!-- Exercise Entry Error -->
+    <string name="exercise_dialog_error_title">Required Fields</string>
+    <string name="exercise_dialog_error_text">You have not filled out all required fields. The image field is not required</string>
+    <string name="exercise_dialog_error_button_text">Dismiss</string>
+
     <!-- Input Labels -->
     <string name="exercise_name_input_label">Exercise Name</string>
     <string name="exercise_set_count_input_label">Number of Sets</string>
