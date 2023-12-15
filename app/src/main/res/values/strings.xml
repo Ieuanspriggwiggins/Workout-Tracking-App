@@ -36,4 +36,10 @@
     <string name="exercise_drop_set_second_weight_label">Drop-Set Second Weight</string>
     <string name="exercise_drop_set_third_weight_label">Drop-Set Third Weight</string>
 
+    <!-- Exercise Card Labels -->
+    <string name="exercise_card_weight_label">Exercise Weight:</string>
+    <string name="exercise_card_set_label">Set Count:</string>
+    <string name="exercise_card_rep_label">Rep Count:</string>
+    <string name="exercise_card_drop_set_label">Drop Sets:</string>
+
 </resources>

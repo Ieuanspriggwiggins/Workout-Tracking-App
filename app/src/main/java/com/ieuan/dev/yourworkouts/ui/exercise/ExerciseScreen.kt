@@ -41,12 +41,17 @@ fun ExerciseScreen(
                 .padding(start = 12.dp, end = 12.dp)
                 .verticalScroll(state = rememberScrollState())
         ){
-            exerciseList.forEach{exercise ->
-                ExerciseCard(exercise = exercise) {
-                    val id: Int = exercise.id
-                    navController.navigate("editExercise/$id")
+            Column(
+                modifier = Modifier.padding(bottom = 42.dp)
+            ){
+                exerciseList.forEach{exercise ->
+                    ExerciseCard(exercise = exercise) {
+                        val id: Int = exercise.id
+                        navController.navigate("editExercise/$id")
+                    }
                 }
             }
+
         }
     }
 }
