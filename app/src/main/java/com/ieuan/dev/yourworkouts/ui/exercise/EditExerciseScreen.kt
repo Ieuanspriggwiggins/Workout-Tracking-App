@@ -27,7 +27,6 @@ fun EditExerciseScreen(
     viewModel: ExerciseViewModel = viewModel()
 ) {
     val dataState = viewModel.dataState
-    viewModel.populateExerciseData()
 
     var expanded by remember {mutableStateOf(false)}
 

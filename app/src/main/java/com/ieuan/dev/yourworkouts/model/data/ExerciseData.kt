@@ -36,11 +36,6 @@ fun dataStateToExerciseEntity(exerciseData: ExerciseData, exerciseImageUri: Uri?
     //Validate the data in dataState
     val defaultIntValue = 0
     val defaultFloatValue = 0f
-    var exerciseImageUriString: String = ""
-
-    if(exerciseImageUri !== null){
-        exerciseImageUriString = exerciseImageUri.toString()
-    }
     return Exercise(
         exerciseName = exerciseData.exerciseName,
         numOfSets = exerciseData.numberOfSets.toIntOrNull() ?: defaultIntValue,
@@ -53,31 +48,7 @@ fun dataStateToExerciseEntity(exerciseData: ExerciseData, exerciseImageUri: Uri?
             ?: defaultFloatValue,
         dropSetThirdWeight = exerciseData.exerciseDropSetWeightThree.toFloatOrNull()
             ?: defaultFloatValue,
-        exerciseImage = exerciseImageUriString
+        exerciseImage = exerciseImageUri.toString()
     )
 }
 
-/**
- * Returns whether the input values are valid or not
- */
-
-fun checkExerciseSubmission(data: ExerciseData): Boolean {
-    //Check if data matches required fields for non drop-set exercise
-    if(!data.isDropSetEnabled){
-        if(data.exerciseName.isEmpty() ||
-            data.numberOfSets.isEmpty() ||
-            data.numberOfReps.isEmpty() ||
-            data.exerciseWeight.isEmpty()
-            ){return false}
-    }
-    //If the exercise is a drop set
-    else{
-        if(data.exerciseName.isEmpty() ||
-            data.numberOfSets.isEmpty() ||
-            data.exerciseDropSetWeightOne.isEmpty() ||
-            data.exerciseDropSetWeightTwo.isEmpty() ||
-            data.exerciseDropSetWeightThree.isEmpty()
-            ){return false}
-    }
-    return true
-}

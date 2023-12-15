@@ -36,7 +36,6 @@ class ExerciseViewModel(
 
     var exerciseImageUri = mutableStateOf<Uri?>(null)
 
-
     /**
      * For submitting a new exercise on the create exercise screen
      */
@@ -49,17 +48,31 @@ class ExerciseViewModel(
 
     private val exerciseId: Int? = savedStateHandle["exerciseId"]
 
+    init{
+        //Populate the fields if we are editing an existing exercise
+        exerciseId?.let{
+            populateExerciseData()
+        }
+    }
+
 
     /**
      * Specifically for the update exercise screen, will populate the state data
      * with the exercise data from the database.
      */
-    fun populateExerciseData() {
-
+    private fun populateExerciseData() {
         exerciseId?.let{
             viewModelScope.launch {
                 val exerciseObj = exerciseRepository.getExercise(exerciseId)
                     .filterNotNull().first()
+
+                val exerciseImageTemp: String = exerciseObj.exerciseImage
+                if(exerciseImageTemp == "null"){
+                    exerciseImageUri.value = null
+                }else{
+                    exerciseImageUri.value = Uri.parse(exerciseObj.exerciseImage)
+                }
+
                 //Set the data state data to the exercise being edited
                 dataState.exerciseName = exerciseObj.exerciseName
                 dataState.numberOfSets = exerciseObj.numOfSets.toString()
@@ -69,7 +82,6 @@ class ExerciseViewModel(
                 dataState.exerciseDropSetWeightOne = exerciseObj.dropSetFirstWeight.toString()
                 dataState.exerciseDropSetWeightTwo = exerciseObj.dropSetSecondWeight.toString()
                 dataState.exerciseDropSetWeightThree = exerciseObj.dropSetThirdWeight.toString()
-                exerciseImageUri.value = Uri.parse(exerciseObj.exerciseImage)
             }
         }
     }
@@ -78,15 +90,17 @@ class ExerciseViewModel(
         getUriPermission()
         viewModelScope.launch {
             val exercise: Exercise = dataStateToExerciseEntity(dataState, exerciseImageUri.value)
-            if (exerciseId != null) {
-                exercise.id = exerciseId
+            exerciseId?.let{
+                exercise.id = it
                 exerciseRepository.update(exercise)
             }
         }
     }
 
     private fun getUriPermission() {
-
+        exerciseImageUri.value?.let{
+            contentResolver.takePersistableUriPermission(it, flags)
+        }
     }
 
     /**
