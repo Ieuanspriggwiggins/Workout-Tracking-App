@@ -29,25 +29,21 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.ieuan.dev.yourworkouts.R
-import com.ieuan.dev.yourworkouts.model.CreateExerciseViewModel
+import com.ieuan.dev.yourworkouts.model.ExerciseViewModel
+import com.ieuan.dev.yourworkouts.model.data.ExerciseData
 import com.ieuan.dev.yourworkouts.model.data.checkExerciseSubmission
 import com.ieuan.dev.yourworkouts.model.data.isValidFloat
 import com.ieuan.dev.yourworkouts.model.data.isValidInt
 import com.ieuan.dev.yourworkouts.ui.components.AlertDialogComponent
+import com.ieuan.dev.yourworkouts.ui.components.ExerciseEditCreateForm
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
 @Composable
 fun CreateExerciseScreen(
     navController: NavController,
-    viewModel: CreateExerciseViewModel = viewModel()
+    viewModel: ExerciseViewModel = viewModel()
 ) {
     val dataState = viewModel.dataState
-
-    val imageGallery = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.OpenDocument(),
-        onResult = {
-            viewModel.exerciseImageUri.value = it
-        } )
 
     FormScreenScaffold(
         navController = navController,
@@ -56,188 +52,12 @@ fun CreateExerciseScreen(
             viewModel.submitExercise()
             navController.popBackStack()
         }
-
     ) {
-        Column(
-            modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
-                .verticalScroll(rememberScrollState()),
-        ){
-            /**
-             * Exercise name entry
-             */
-            OutlinedTextField(
-                label = {
-                        Text(text = stringResource(R.string.exercise_name_input_label))
-                },
-                value = dataState.exerciseName,
-                onValueChange = {
-                    viewModel.dataState = dataState.copy(exerciseName = it)
-                },
-                trailingIcon = {
-                    if(dataState.exerciseName.isNotEmpty()){
-                        IconButton(
-                            onClick = {viewModel.dataState = dataState.copy(exerciseName = "")}
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.Clear,
-                                contentDescription = null
-                            )
-                        }
-                    }
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    capitalization = KeyboardCapitalization.Words
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 24.dp)
-            )
+        var dataState: ExerciseData = viewModel.dataState
 
-            /**
-             * Number of sets entry
-             */
-            OutlinedTextField(
-                label = {
-                    Text(text = stringResource(R.string.exercise_set_count_input_label))
-                },
-                value = dataState.numberOfSets,
-                onValueChange = {
-                    if(isValidInt(it) || it.isEmpty()) //
-                        viewModel.dataState = dataState.copy(numberOfSets = it)
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(
-                    keyboardType = KeyboardType.Number
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 24.dp)
-            )
-
-            //TODO: add functionality for image
-            Button(
-                onClick = {
-                    imageGallery.launch(arrayOf("image/*"))
-                },
-                modifier = Modifier
-                    .padding(bottom = 24.dp)
-            ) {
-                Text(text = stringResource(R.string.upload_img_btn))
-            }
-
-            viewModel.exerciseImageUri.value?.let{
-                AsyncImage(
-                    model = viewModel.exerciseImageUri.value,
-                    contentDescription = null,
-                )
-            }
-
-            /**
-             * Is drop-set enabled
-             */
-            Row(
-                modifier = Modifier
-                    .padding(bottom = 24.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Text(text = stringResource(R.string.is_drop_set_label))
-                Switch(
-                    checked = dataState.isDropSetEnabled,
-                    onCheckedChange = {
-                        viewModel.dataState = dataState.copy(isDropSetEnabled = !dataState.isDropSetEnabled)
-                    },
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                )
-            }
-
-            if(!dataState.isDropSetEnabled){
-                OutlinedTextField(
-                    label = {
-                        Text(text = stringResource(R.string.exercise_rep_count_input_label))
-                    },
-                    value = dataState.numberOfReps,
-                    onValueChange = {
-                        if(isValidInt(it) || it.isEmpty())
-                            viewModel.dataState = dataState.copy(numberOfReps = it)
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 24.dp)
-                )
-
-                OutlinedTextField(
-                    label = {
-                        Text(text = stringResource(R.string.exercise_weight_label))
-                    },
-                    value = dataState.exerciseWeight,
-                    onValueChange = {
-                        if(isValidFloat(it) || it.isEmpty())
-                            viewModel.dataState = dataState.copy(exerciseWeight = it)
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 24.dp)
-                )
-
-            }else{
-                OutlinedTextField(
-                    label = {
-                        Text(text = stringResource(R.string.exercise_drop_set_first_weight_label))
-                    },
-                    value = dataState.exerciseDropSetWeightOne,
-                    onValueChange = {
-                        if(isValidFloat(it) || it.isEmpty())
-                            viewModel.dataState = dataState.copy(exerciseDropSetWeightOne = it)
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 24.dp)
-                )
-
-                OutlinedTextField(
-                    label = {
-                        Text(text = stringResource(R.string.exercise_drop_set_second_weight_label))
-                    },
-                    value = dataState.exerciseDropSetWeightTwo,
-                    onValueChange = {
-                        if(isValidFloat(it) || it.isEmpty())
-                            viewModel.dataState = dataState.copy(exerciseDropSetWeightTwo = it)
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 24.dp)
-                )
-
-                OutlinedTextField(
-                    label = {
-                        Text(text = stringResource(R.string.exercise_drop_set_third_weight_label))
-                    },
-                    value = dataState.exerciseDropSetWeightThree,
-                    onValueChange = {
-                        if(isValidFloat(it) || it.isEmpty())
-                            viewModel.dataState = dataState.copy(exerciseDropSetWeightThree = it)
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 24.dp)
-                )
-            }
-        }
+        ExerciseEditCreateForm(
+            dataState = dataState,
+            viewModel = viewModel
+        )
     }
 }
