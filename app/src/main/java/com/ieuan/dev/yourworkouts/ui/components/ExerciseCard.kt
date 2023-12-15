@@ -38,10 +38,7 @@ fun ExerciseCard(
                 fontSize = 18.sp
             )
             val uri: Uri = Uri.parse(exercise.exerciseImage)
-            val intent = Intent()
-            intent.action = Intent.ACTION_VIEW
-            intent.setDataAndType(uri, "image/*")
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
 
             if(exercise.exerciseImage.isNotEmpty()){
                 AsyncImage(

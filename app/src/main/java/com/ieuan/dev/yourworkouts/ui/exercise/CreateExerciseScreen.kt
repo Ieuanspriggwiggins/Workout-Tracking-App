@@ -53,8 +53,6 @@ fun CreateExerciseScreen(
             navController.popBackStack()
         }
     ) {
-        var dataState: ExerciseData = viewModel.dataState
-
         ExerciseEditCreateForm(
             dataState = dataState,
             viewModel = viewModel

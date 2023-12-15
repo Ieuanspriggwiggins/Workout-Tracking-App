@@ -36,6 +36,11 @@ fun dataStateToExerciseEntity(exerciseData: ExerciseData, exerciseImageUri: Uri?
     //Validate the data in dataState
     val defaultIntValue = 0
     val defaultFloatValue = 0f
+    var exerciseImageUriString: String = ""
+
+    if(exerciseImageUri !== null){
+        exerciseImageUriString = exerciseImageUri.toString()
+    }
     return Exercise(
         exerciseName = exerciseData.exerciseName,
         numOfSets = exerciseData.numberOfSets.toIntOrNull() ?: defaultIntValue,
@@ -48,7 +53,7 @@ fun dataStateToExerciseEntity(exerciseData: ExerciseData, exerciseImageUri: Uri?
             ?: defaultFloatValue,
         dropSetThirdWeight = exerciseData.exerciseDropSetWeightThree.toFloatOrNull()
             ?: defaultFloatValue,
-        exerciseImage = exerciseImageUri.toString()
+        exerciseImage = exerciseImageUriString
     )
 }
 

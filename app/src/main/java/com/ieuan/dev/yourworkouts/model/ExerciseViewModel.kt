@@ -3,6 +3,7 @@ package com.ieuan.dev.yourworkouts.model
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,6 +11,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.ieuan.dev.yourworkouts.TAG
 import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.datasource.ExerciseRepository
 import com.ieuan.dev.yourworkouts.model.data.ExerciseData
@@ -24,8 +26,8 @@ class ExerciseViewModel(
     savedStateHandle: SavedStateHandle
 ): AndroidViewModel(application) {
     private val exerciseRepository: ExerciseRepository = ExerciseRepository(application)
-    val contentResolver = application.contentResolver
-    val flags: Int = Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
+    private val contentResolver = application.contentResolver
+    private val flags: Int = Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
 
     var exercises: Flow<List<Exercise>> = exerciseRepository.getExerciseList()
         private set
@@ -39,14 +41,13 @@ class ExerciseViewModel(
      * For submitting a new exercise on the create exercise screen
      */
     fun submitExercise() {
-        exerciseImageUri.value?.let{contentResolver.takePersistableUriPermission(it, flags)}
-
+        getUriPermission()
         viewModelScope.launch {
             exerciseRepository.insert(dataStateToExerciseEntity(dataState, exerciseImageUri.value))
         }
     }
 
-    val exerciseId: Int? = savedStateHandle["exerciseId"]
+    private val exerciseId: Int? = savedStateHandle["exerciseId"]
 
 
     /**
@@ -54,6 +55,7 @@ class ExerciseViewModel(
      * with the exercise data from the database.
      */
     fun populateExerciseData() {
+
         exerciseId?.let{
             viewModelScope.launch {
                 val exerciseObj = exerciseRepository.getExercise(exerciseId)
@@ -67,13 +69,23 @@ class ExerciseViewModel(
                 dataState.exerciseDropSetWeightOne = exerciseObj.dropSetFirstWeight.toString()
                 dataState.exerciseDropSetWeightTwo = exerciseObj.dropSetSecondWeight.toString()
                 dataState.exerciseDropSetWeightThree = exerciseObj.dropSetThirdWeight.toString()
-                exerciseImageUri.value = exerciseObj.exerciseImage.toUri()
-
+                exerciseImageUri.value = Uri.parse(exerciseObj.exerciseImage)
             }
         }
     }
 
     fun updateExercise() {
+        getUriPermission()
+        viewModelScope.launch {
+            val exercise: Exercise = dataStateToExerciseEntity(dataState, exerciseImageUri.value)
+            if (exerciseId != null) {
+                exercise.id = exerciseId
+                exerciseRepository.update(exercise)
+            }
+        }
+    }
+
+    private fun getUriPermission() {
 
     }
 
