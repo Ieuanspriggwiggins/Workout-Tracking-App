@@ -1,3 +1,8 @@
+/**
+ * File contains a data class for the exeercise and some useful
+ * functions that are used across different screens for exercises
+ */
+
 package com.ieuan.dev.yourworkouts.model.data
 
 import android.net.Uri
@@ -22,7 +27,6 @@ fun isValidFloat(s: String): Boolean {
     return s.toFloatOrNull() != null
 }
 
-
 /**
  * Converts the data state data object into a valid exercise entity for database entry
  * checks if the values are transferable to the given type, otherwise app would crash if a value
@@ -46,4 +50,29 @@ fun dataStateToExerciseEntity(exerciseData: ExerciseData, exerciseImageUri: Uri?
             ?: defaultFloatValue,
         exerciseImage = exerciseImageUri.toString()
     )
+}
+
+/**
+ * Returns whether the input values are valid or not
+ */
+
+fun checkExerciseSubmission(data: ExerciseData): Boolean {
+    //Check if data matches required fields for non drop-set exercise
+    if(!data.isDropSetEnabled){
+        if(data.exerciseName.isEmpty() ||
+            data.numberOfSets.isEmpty() ||
+            data.numberOfReps.isEmpty() ||
+            data.exerciseWeight.isEmpty()
+            ){return false}
+    }
+    //If the exercise is a drop set
+    else{
+        if(data.exerciseName.isEmpty() ||
+            data.numberOfSets.isEmpty() ||
+            data.exerciseDropSetWeightOne.isEmpty() ||
+            data.exerciseDropSetWeightTwo.isEmpty() ||
+            data.exerciseDropSetWeightThree.isEmpty()
+            ){return false}
+    }
+    return true
 }

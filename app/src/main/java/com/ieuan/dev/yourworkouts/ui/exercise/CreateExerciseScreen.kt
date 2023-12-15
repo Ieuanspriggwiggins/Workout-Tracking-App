@@ -17,6 +17,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,8 +30,10 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.model.CreateExerciseViewModel
+import com.ieuan.dev.yourworkouts.model.data.checkExerciseSubmission
 import com.ieuan.dev.yourworkouts.model.data.isValidFloat
 import com.ieuan.dev.yourworkouts.model.data.isValidInt
+import com.ieuan.dev.yourworkouts.ui.components.AlertDialogComponent
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
 @Composable
@@ -38,7 +41,6 @@ fun CreateExerciseScreen(
     navController: NavController,
     viewModel: CreateExerciseViewModel = viewModel()
 ) {
-
     val dataState = viewModel.dataState
 
     val imageGallery = rememberLauncherForActivityResult(
@@ -46,7 +48,6 @@ fun CreateExerciseScreen(
         onResult = {
             viewModel.exerciseImageUri.value = it
         } )
-
 
     FormScreenScaffold(
         navController = navController,
