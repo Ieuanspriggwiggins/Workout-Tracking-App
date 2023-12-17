@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Workout(
     var workoutName: String = "",
     var dayOfWeek: days = days.MONDAY, //Default value
+    var isEnabled: Boolean = false,
     @PrimaryKey(autoGenerate = false)
     var id: Int = 0,
 )

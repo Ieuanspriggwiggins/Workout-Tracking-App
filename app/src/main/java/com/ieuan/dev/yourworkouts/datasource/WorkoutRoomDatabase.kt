@@ -42,7 +42,7 @@ abstract class WorkoutRoomDatabase : RoomDatabase() {
                     super.onCreate(db)
 
                     coroutineScope.launch {
-
+                        
                     }
                 }
             }

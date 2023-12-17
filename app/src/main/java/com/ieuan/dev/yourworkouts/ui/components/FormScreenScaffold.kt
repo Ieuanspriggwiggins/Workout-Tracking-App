@@ -39,6 +39,8 @@ fun FormScreenScaffold(
     navController: NavController,
     formTitle: String,
     onSaveClick: () -> Unit = {},
+    bottomLeftButtonText: String = stringResource(R.string.save_btn),
+    bottomRightButtonText: String = stringResource(R.string.cancel_btn),
     actions: @Composable () -> Unit = {},
     content: @Composable () -> Unit,
 ) {
@@ -68,14 +70,14 @@ fun FormScreenScaffold(
                     .padding(bottom = 24.dp, start = 24.dp)
             ){
                 Button(onClick = onSaveClick) {
-                    Text(text = stringResource(R.string.save_btn))
+                    Text(text = bottomLeftButtonText)
                 }
                 OutlinedButton(
                     onClick = {navController.popBackStack()},
                     modifier = Modifier
                         .padding(start = 12.dp)
                 ) {
-                    Text(text = stringResource(R.string.cancel_btn))
+                    Text(text = bottomRightButtonText)
                 }
             }
         }

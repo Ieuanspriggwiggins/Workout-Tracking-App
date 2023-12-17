@@ -14,7 +14,9 @@ fun ScheduleScreen(
         navController = navController,
         screenTitle = stringResource(id = R.string.schedule_screen_title),
         hasFabIcon = true,
-        fabOnclick = {}
+        fabOnclick = {
+            navController.navigate("addScheduleScreen")
+        }
     ) {
 
     }
