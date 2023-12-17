@@ -1,5 +1,6 @@
 package com.ieuan.dev.yourworkouts.datasource
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -7,6 +8,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Database(
@@ -16,6 +18,7 @@ import kotlinx.coroutines.launch
 abstract class WorkoutRoomDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
+    abstract fun workoutDao(): WorkoutDao
 
     companion object {
         private var instance: WorkoutRoomDatabase? = null
@@ -30,22 +33,22 @@ abstract class WorkoutRoomDatabase : RoomDatabase() {
                     "workout_db"
                 )
                     .allowMainThreadQueries()
-                    .addCallback(roomDatabaseCallback(context))
+//                    .addCallback(roomDatabaseCallback(context))
                     .build()
             }
             return instance
         }
 
-        private fun roomDatabaseCallback(context: Context): Callback {
-            return object: Callback() {
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-
-                    coroutineScope.launch {
-                        
-                    }
-                }
-            }
-        }
+//        private fun roomDatabaseCallback(context: Context): Callback {
+//            return object: Callback() {
+//                override fun onCreate(db: SupportSQLiteDatabase) {
+//                    super.onCreate(db)
+//                    val workoutRepository = WorkoutRepository(Application())
+//                    coroutineScope.launch {
+//
+//                    }
+//                }
+//            }
+//        }
     }
 }
