@@ -16,4 +16,11 @@ class WorkoutRepository(application: Application) {
 
     fun getWorkoutsByState(enabled: Boolean): Flow<List<Workout>> = workoutDao.getWorkoutsByState(enabled)
 
+    fun isEmpty(): Boolean = workoutDao.isEmpty()
+
+    suspend fun insertDefaultListOfWorkouts() {
+        defaultWorkoutList.forEach{ workout ->
+            insert(workout)
+        }
+    }
 }

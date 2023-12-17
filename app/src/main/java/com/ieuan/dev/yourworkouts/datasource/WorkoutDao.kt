@@ -24,4 +24,7 @@ interface WorkoutDao {
 
     @Query("SELECT * FROM workouts WHERE isEnabled = :state")
     fun getWorkoutsByState(state: Boolean): Flow<List<Workout>>
+
+    @Query("SELECT (SELECT COUNT(*) FROM workouts) == 0")
+    fun isEmpty(): Boolean
 }

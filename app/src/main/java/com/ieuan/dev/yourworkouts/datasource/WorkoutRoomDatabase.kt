@@ -43,10 +43,6 @@ abstract class WorkoutRoomDatabase : RoomDatabase() {
             return object: Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
-
-                    coroutineScope.launch {
-
-                    }
                 }
             }
         }
