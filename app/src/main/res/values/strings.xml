@@ -13,6 +13,7 @@
     <string name="exercise_screen_title">Your Exercises</string>
     <string name="create_exercise_screen_title">Create Exercise</string>
     <string name="edit_exercise_screen_title">Edit Exercise</string>
+    <string name="add_days_to_schedule_title">Add Day to Your Schedule</string>
 
     <!-- Button Texts -->
     <string name = "add_btn">Add</string>

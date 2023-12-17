@@ -23,4 +23,13 @@ class WorkoutRepository(application: Application) {
             insert(workout)
         }
     }
+
+    /**
+     * Updates all the workouts in the database
+     */
+    suspend fun updateWorkouts(workoutsList: List<Workout>) {
+        workoutsList.forEach{workout ->
+            update(workout)
+        }
+    }
 }
