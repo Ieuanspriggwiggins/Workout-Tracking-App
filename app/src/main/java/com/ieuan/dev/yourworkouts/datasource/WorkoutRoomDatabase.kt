@@ -33,22 +33,22 @@ abstract class WorkoutRoomDatabase : RoomDatabase() {
                     "workout_db"
                 )
                     .allowMainThreadQueries()
-//                    .addCallback(roomDatabaseCallback(context))
+                    .addCallback(roomDatabaseCallback(context))
                     .build()
             }
             return instance
         }
 
-//        private fun roomDatabaseCallback(context: Context): Callback {
-//            return object: Callback() {
-//                override fun onCreate(db: SupportSQLiteDatabase) {
-//                    super.onCreate(db)
-//                    val workoutRepository = WorkoutRepository(Application())
-//                    coroutineScope.launch {
-//
-//                    }
-//                }
-//            }
-//        }
+        private fun roomDatabaseCallback(context: Context): Callback {
+            return object: Callback() {
+                override fun onCreate(db: SupportSQLiteDatabase) {
+                    super.onCreate(db)
+
+                    coroutineScope.launch {
+
+                    }
+                }
+            }
+        }
     }
 }

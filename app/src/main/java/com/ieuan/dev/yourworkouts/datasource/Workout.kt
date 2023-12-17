@@ -9,7 +9,7 @@ data class Workout(
     var dayOfWeek: days = days.MONDAY, //Default value
     var isEnabled: Boolean = false,
     @PrimaryKey(autoGenerate = false)
-    var id: Int = 0,
+    var id: Int,
 )
 
 enum class days {
