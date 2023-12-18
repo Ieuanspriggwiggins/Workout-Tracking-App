@@ -16,18 +16,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.datasource.Workout
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EnabledWorkoutCard(workout: Workout) {
+fun EnabledWorkoutCard(
+    navController: NavController,
+    workout: Workout
+) {
     Card(
         modifier = Modifier
             .padding(start = 8.dp, end = 8.dp, bottom = 16.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(0),
         onClick = {
-            
+            val id = workout.id
+            navController.navigate("editWorkoutScreen/$id")
         }
     ) {
         Row(

@@ -18,6 +18,7 @@ import com.ieuan.dev.yourworkouts.ui.exercise.EditExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.ExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.home.HomeScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.AddScheduleScreen
+import com.ieuan.dev.yourworkouts.ui.schedule.EditWorkoutScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.ScheduleScreen
 import com.ieuan.dev.yourworkouts.ui.theme.YourWorkoutsTheme
 
@@ -55,6 +56,10 @@ class MainActivity : ComponentActivity() {
                 route = "editExercise/{exerciseId}",
                 arguments = listOf(navArgument("exerciseId"){type = NavType.IntType})
             ) {EditExerciseScreen(navController = navController)}
+            composable(
+                route = "editWorkoutScreen/{workoutId}",
+                arguments = listOf(navArgument("workoutId"){type = NavType.IntType})
+            ) {EditWorkoutScreen(navController)}
             composable("addScheduleScreen") {AddScheduleScreen(navController)}
         }
     }

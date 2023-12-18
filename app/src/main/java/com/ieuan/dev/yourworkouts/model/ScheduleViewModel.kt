@@ -24,6 +24,8 @@ class ScheduleViewModel(
     val enabledWorkoutsList: Flow<List<Workout>> = workoutRepository.getWorkoutsByState(true)
     val disabledWorkoutsList: Flow<List<Workout>> = workoutRepository.getWorkoutsByState(false)
 
+    private val workoutId: Int? = savedStateHandle["workoutId"]
+
     /**
      * Updates the workouts list in the database with any changes made
      */
@@ -32,7 +34,7 @@ class ScheduleViewModel(
             workoutRepository.updateWorkouts(list)
         }
     }
-
+    
     /**
      * Check if schedules database table is empty, if so, populate
      */

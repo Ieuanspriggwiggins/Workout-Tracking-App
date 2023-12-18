@@ -41,7 +41,10 @@ fun ScheduleScreen(
                 .padding(top = 32.dp, start = 8.dp, end = 8.dp)
         ) {
             enabledWorkoutsList.forEach{workout ->
-                EnabledWorkoutCard(workout = workout)
+                EnabledWorkoutCard(
+                    workout = workout,
+                    navController = navController
+                )
             }
         }
     }
