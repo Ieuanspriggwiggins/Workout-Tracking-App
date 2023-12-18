@@ -44,7 +44,7 @@ fun EnabledWorkoutCard(
 
         ){
             Column {
-                Text(text = workout.workoutName)
+                Text(text = workout.dayOfWeek.toString())
             }
             Icon(
                 imageVector = Icons.Filled.Edit,

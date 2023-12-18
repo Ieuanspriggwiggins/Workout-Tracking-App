@@ -34,7 +34,7 @@ class ScheduleViewModel(
             workoutRepository.updateWorkouts(list)
         }
     }
-    
+
     /**
      * Check if schedules database table is empty, if so, populate
      */

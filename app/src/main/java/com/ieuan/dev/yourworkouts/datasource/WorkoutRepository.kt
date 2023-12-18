@@ -14,6 +14,8 @@ class WorkoutRepository(application: Application) {
 
     fun getWorkouts(): Flow<List<Workout>> = workoutDao.getWorkouts()
 
+    fun getWorkout(id: Int):Flow<Workout> = workoutDao.getWorkout(id)
+
     fun getWorkoutsByState(enabled: Boolean): Flow<List<Workout>> = workoutDao.getWorkoutsByState(enabled)
 
     fun isEmpty(): Boolean = workoutDao.isEmpty()

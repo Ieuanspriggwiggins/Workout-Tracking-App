@@ -6,14 +6,15 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "workouts")
 data class Workout(
     var workoutName: String = "",
-    var dayOfWeek: days = days.MONDAY, //Default value
+    var dayOfWeek: Days = Days.Monday, //Default value
     var isEnabled: Boolean = false,
+    var workoutLength: String = "",
     @PrimaryKey(autoGenerate = false)
     var id: Int,
 )
 
-enum class days {
-    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+enum class Days {
+    Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 }
 
 /**
@@ -21,11 +22,12 @@ enum class days {
  */
 
 var defaultWorkoutList = listOf(
-    Workout(workoutName = "Monday", dayOfWeek = days.MONDAY, id = 0),
-    Workout(workoutName = "Tuesday", dayOfWeek = days.TUESDAY, id = 1),
-    Workout(workoutName = "Wednesday", dayOfWeek = days.WEDNESDAY, id = 2),
-    Workout(workoutName = "Thursday", dayOfWeek = days.THURSDAY, id = 3),
-    Workout(workoutName = "Friday", dayOfWeek = days.FRIDAY, id = 4),
-    Workout(workoutName = "Saturday", dayOfWeek = days.SATURDAY, id = 5),
-    Workout(workoutName = "Sunday", dayOfWeek = days.SUNDAY, id = 6)
+    //A minimum of one workout/day must be enabled at any given time
+    Workout(dayOfWeek = Days.Monday, id = 0, isEnabled = true),
+    Workout(dayOfWeek = Days.Tuesday, id = 1),
+    Workout(dayOfWeek = Days.Wednesday, id = 2),
+    Workout(dayOfWeek = Days.Thursday, id = 3),
+    Workout(dayOfWeek = Days.Friday, id = 4),
+    Workout(dayOfWeek = Days.Saturday, id = 5),
+    Workout(dayOfWeek = Days.Sunday, id = 6)
 )
