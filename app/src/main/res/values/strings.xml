@@ -46,4 +46,13 @@
     <string name="exercise_card_rep_label">Rep Count:</string>
     <string name="exercise_card_drop_set_label">Drop Sets:</string>
 
+    <!-- Days of week -->
+    <string name="day_monday">Monday</string>
+    <string name="day_tuesday">Tuesday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_thursday">Thursday</string>
+    <string name="day_friday">Friday</string>
+    <string name="day_saturday">Saturday</string>
+    <string name="day_sunday">Sunday</string>
+
 </resources>

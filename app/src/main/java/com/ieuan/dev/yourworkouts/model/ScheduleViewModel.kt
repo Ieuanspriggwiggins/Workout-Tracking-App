@@ -2,6 +2,9 @@ package com.ieuan.dev.yourworkouts.model
 
 import android.app.Application
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -9,6 +12,7 @@ import com.ieuan.dev.yourworkouts.TAG
 import com.ieuan.dev.yourworkouts.datasource.ExerciseRepository
 import com.ieuan.dev.yourworkouts.datasource.Workout
 import com.ieuan.dev.yourworkouts.datasource.WorkoutRepository
+import com.ieuan.dev.yourworkouts.model.data.WorkoutEditData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -25,6 +29,8 @@ class ScheduleViewModel(
     val disabledWorkoutsList: Flow<List<Workout>> = workoutRepository.getWorkoutsByState(false)
 
     private val workoutId: Int? = savedStateHandle["workoutId"]
+
+    var dataState: WorkoutEditData by mutableStateOf(WorkoutEditData())
 
     /**
      * Updates the workouts list in the database with any changes made

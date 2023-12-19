@@ -16,9 +16,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.unit.dp
+import com.ieuan.dev.yourworkouts.datasource.Days
 import com.ieuan.dev.yourworkouts.datasource.Workout
+import com.ieuan.dev.yourworkouts.datasource.dayToString
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +46,7 @@ fun DisabledWorkoutCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ){
-            Text(text = workout.dayOfWeek.toString())
+            Text(text = dayToString(workout.dayOfWeek, LocalContext.current))
             Checkbox(
                 checked = boxChecked,
                 onCheckedChange = {

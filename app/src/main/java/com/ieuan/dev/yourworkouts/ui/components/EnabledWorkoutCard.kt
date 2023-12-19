@@ -15,9 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.datasource.Workout
+import com.ieuan.dev.yourworkouts.datasource.dayToString
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,10 +43,9 @@ fun EnabledWorkoutCard(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
-
         ){
             Column {
-                Text(text = workout.dayOfWeek.toString())
+                Text(text = dayToString(workout.dayOfWeek, LocalContext.current))
             }
             Icon(
                 imageVector = Icons.Filled.Edit,
