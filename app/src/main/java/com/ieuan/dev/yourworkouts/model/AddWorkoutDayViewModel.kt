@@ -18,4 +18,10 @@ class AddWorkoutDayViewModel(
     //Get the list of days that aren't current enabled
     var disabledDayList: Flow<List<WorkoutDay>> = workoutDayRepository.getWorkoutsByState(false)
         private set
+
+    fun updateList(list: List<WorkoutDay>) {
+        viewModelScope.launch {
+            workoutDayRepository.updateFromList(list)
+        }
+    }
 }

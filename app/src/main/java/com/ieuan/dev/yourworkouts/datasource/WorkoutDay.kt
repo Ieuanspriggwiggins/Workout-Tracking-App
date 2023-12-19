@@ -14,7 +14,7 @@ data class WorkoutDay(
     var workoutLength: String = "",
     var isEnabled: Boolean = false,
     @PrimaryKey
-    var workoutDay: Days
+    var workoutDay: Days = Days.MONDAY
 )
 
 /**

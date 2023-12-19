@@ -13,6 +13,9 @@ class ScheduleScreenViewModel(application: Application) :AndroidViewModel(applic
     //get the workout day repository
     private val workoutDayRepository = WorkoutDayRepository(application)
 
+    //List of days/workouts on the schedule screen
+    val enabledDayList = workoutDayRepository.getWorkoutsByState(true)
+
     /**
      * Check if the database table is empty, if so, then needs populating
      * as the app has been started for the first time (or the database has been

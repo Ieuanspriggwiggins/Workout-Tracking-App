@@ -19,12 +19,19 @@ class WorkoutDayRepository(application: Application) {
     fun getWorkoutsByState(state: Boolean):
             Flow<List<WorkoutDay>> = workoutDayDao.getWorkoutByState(state)
 
+    suspend fun updateFromList(list: List<WorkoutDay>){
+        list.forEach{ workout ->
+            update(workout)
+        }
+    }
+
     /**
      * Populates the database with the default values
      */
     suspend fun populateDefaultValues() {
         val defaultWorkoutsDays = listOf(
-            WorkoutDay(workoutDay = Days.MONDAY),
+            //Monday by default is enabled, as we have to have at least one workout
+            WorkoutDay(workoutDay = Days.MONDAY, isEnabled = true),
             WorkoutDay(workoutDay = Days.TUESDAY),
             WorkoutDay(workoutDay = Days.WEDNESDAY),
             WorkoutDay(workoutDay = Days.THURSDAY),
