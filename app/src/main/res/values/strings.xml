@@ -35,6 +35,7 @@
     <string name="exercise_rep_count_input_label">Number of Reps</string>
     <string name="exercise_weight_label">Exercise Weight (kg)</string>
     <string name="workout_name_label">Workout Name</string>
+    <string name="workout_length_label">Workout Length</string>
 
     <string name="exercise_drop_set_first_weight_label">Drop-Set First Weight</string>
     <string name="exercise_drop_set_second_weight_label">Drop-Set Second Weight</string>
