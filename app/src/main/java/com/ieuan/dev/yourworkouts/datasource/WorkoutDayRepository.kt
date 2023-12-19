@@ -1,11 +1,6 @@
 package com.ieuan.dev.yourworkouts.datasource
 
 import android.app.Application
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 class WorkoutDayRepository(application: Application) {
@@ -20,4 +15,23 @@ class WorkoutDayRepository(application: Application) {
     fun getWorkout(day: Days): Flow<WorkoutDay> = workoutDayDao.getWorkout(day)
 
     fun getWorkouts(): Flow<List<WorkoutDay>> = workoutDayDao.getWorkouts()
+
+    /**
+     * Populates the database with the default values
+     */
+    suspend fun populateDefaultValues() {
+        val defaultWorkoutsDays = listOf(
+            WorkoutDay(workoutDay = Days.MONDAY),
+            WorkoutDay(workoutDay = Days.TUESDAY),
+            WorkoutDay(workoutDay = Days.WEDNESDAY),
+            WorkoutDay(workoutDay = Days.THURSDAY),
+            WorkoutDay(workoutDay = Days.FRIDAY),
+            WorkoutDay(workoutDay = Days.SATURDAY),
+            WorkoutDay(workoutDay = Days.SUNDAY)
+        )
+
+        defaultWorkoutsDays.forEach{workoutDay ->
+            insert(workoutDay)
+        }
+    }
 }

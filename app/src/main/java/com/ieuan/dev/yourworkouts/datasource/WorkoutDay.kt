@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class WorkoutDay(
     var workoutName: String = "",
     var workoutLength: String = "",
+    var isEnabled: Boolean = false,
     @PrimaryKey
     var workoutDay: Days
 )
@@ -15,17 +16,21 @@ data class WorkoutDay(
  * Enum used for clarification of the day a workout falls on
  */
 enum class Days{
-    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-}
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
 
-fun dayToString(day: Days): String {
-    return when(day){
-        Days.MONDAY -> "Monday"
-        Days.TUESDAY -> "Tuesday"
-        Days.WEDNESDAY -> "Wednesday"
-        Days.THURSDAY -> "Thursday"
-        Days.FRIDAY -> "Friday"
-        Days.SATURDAY -> "Saturday"
-        Days.SUNDAY -> "Sunday"
+    /**
+     * Converts a day enum class into a string
+     */
+    fun dayToString(day: Days): String {
+        return when(day){
+            MONDAY -> "Monday"
+            TUESDAY -> "Tuesday"
+            WEDNESDAY -> "Wednesday"
+            THURSDAY -> "Thursday"
+            FRIDAY -> "Friday"
+            SATURDAY -> "Saturday"
+            SUNDAY -> "Sunday"
+        }
     }
 }
+

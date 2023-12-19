@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [Exercise::class],
+    entities = [Exercise::class, WorkoutDay::class],
     version = 1,
     exportSchema = false)
 abstract class WorkoutRoomDatabase : RoomDatabase() {

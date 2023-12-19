@@ -17,14 +17,13 @@ import com.ieuan.dev.yourworkouts.ui.exercise.CreateExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.EditExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.ExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.home.HomeScreen
+import com.ieuan.dev.yourworkouts.ui.schedule.AddWorkoutDayScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.ScheduleScreen
 import com.ieuan.dev.yourworkouts.ui.theme.YourWorkoutsTheme
 
 val TAG: String = "TAG_SC"
 
 class MainActivity : ComponentActivity() {
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +53,7 @@ class MainActivity : ComponentActivity() {
                 route = "editExercise/{exerciseId}",
                 arguments = listOf(navArgument("exerciseId"){type = NavType.IntType})
             ) {EditExerciseScreen(navController = navController)}
+            composable("addWorkoutDayScreen") { AddWorkoutDayScreen(navController = navController)}
         }
     }
 }
