@@ -16,6 +16,9 @@ class WorkoutDayRepository(application: Application) {
 
     fun getWorkouts(): Flow<List<WorkoutDay>> = workoutDayDao.getWorkouts()
 
+    fun getWorkoutsByState(state: Boolean):
+            Flow<List<WorkoutDay>> = workoutDayDao.getWorkoutByState(state)
+
     /**
      * Populates the database with the default values
      */

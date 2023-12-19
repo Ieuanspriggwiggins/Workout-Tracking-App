@@ -24,4 +24,7 @@ interface WorkoutDayDao {
 
     @Query("SELECT * FROM workout_day")
     fun getWorkouts(): Flow<List<WorkoutDay>>
+
+    @Query("SELECT * FROM workout_day WHERE isEnabled = :state")
+    fun getWorkoutByState(state: Boolean): Flow<List<WorkoutDay>>
 }
