@@ -16,11 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WorkoutDayCard(workout: WorkoutDay) {
+fun WorkoutDayCard(
+    navController: NavController,
+    workout: WorkoutDay
+) {
 
     Card(
         modifier = Modifier
@@ -28,7 +32,8 @@ fun WorkoutDayCard(workout: WorkoutDay) {
             .fillMaxWidth(),
         shape = RoundedCornerShape(0),
         onClick = {
-
+            val workoutDay = workout.workoutDay.toString()
+            navController.navigate("editWorkoutScreen/$workoutDay")
         }
     ){
         Row(
@@ -38,7 +43,11 @@ fun WorkoutDayCard(workout: WorkoutDay) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ){
-            Text(text = workout.workoutDay.dayToString(LocalContext.current))
+            var outputString: String = workout.workoutDay.dayToString(LocalContext.current)
+            if(workout.workoutName.isNotEmpty()){
+                outputString += ": " + workout.workoutName
+            }
+            Text(text = outputString)
             Icon(
                 contentDescription = null,
                 imageVector = Icons.Filled.Edit

@@ -36,7 +36,7 @@ fun ScheduleScreen(
                 .padding(horizontal = 14.dp, vertical = 24.dp)
         ) {
             list.forEach{ workout ->
-                WorkoutDayCard(workout)
+                WorkoutDayCard(navController, workout)
             }
         }
     }

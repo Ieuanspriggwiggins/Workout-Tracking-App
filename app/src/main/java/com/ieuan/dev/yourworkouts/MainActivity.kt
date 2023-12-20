@@ -13,11 +13,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.ieuan.dev.yourworkouts.datasource.Days
 import com.ieuan.dev.yourworkouts.ui.exercise.CreateExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.EditExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.exercise.ExerciseScreen
 import com.ieuan.dev.yourworkouts.ui.home.HomeScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.AddWorkoutDayScreen
+import com.ieuan.dev.yourworkouts.ui.schedule.EditWorkoutDayScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.ScheduleScreen
 import com.ieuan.dev.yourworkouts.ui.theme.YourWorkoutsTheme
 
@@ -54,6 +56,10 @@ class MainActivity : ComponentActivity() {
                 arguments = listOf(navArgument("exerciseId"){type = NavType.IntType})
             ) {EditExerciseScreen(navController = navController)}
             composable("addWorkoutDayScreen") { AddWorkoutDayScreen(navController = navController)}
+            composable(
+                route = "editWorkoutScreen/{workoutDay}",
+                arguments = listOf(navArgument("workoutDay"){type = NavType.StringType})
+            ) { EditWorkoutDayScreen(navController = navController) }
         }
     }
 }

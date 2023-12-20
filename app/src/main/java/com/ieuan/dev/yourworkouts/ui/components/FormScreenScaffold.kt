@@ -3,9 +3,11 @@ package com.ieuan.dev.yourworkouts.ui.components
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
@@ -41,6 +43,8 @@ fun FormScreenScaffold(
     onSaveClick: () -> Unit = {},
     bottomLeftButtonText: String = stringResource(R.string.save_btn),
     bottomRightButtonText: String = stringResource(R.string.cancel_btn),
+    hasFabIcon: Boolean = false,
+    fabOnclick: () -> Unit = {},
     actions: @Composable () -> Unit = {},
     content: @Composable () -> Unit,
 ) {
@@ -62,6 +66,19 @@ fun FormScreenScaffold(
                     }
                 }
             )
+        },
+
+        floatingActionButton = {
+            if(hasFabIcon){
+                FloatingActionButton(
+                    onClick = fabOnclick
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = null
+                    )
+                }
+            }
         },
 
         bottomBar = {
