@@ -37,7 +37,8 @@ fun EditWorkoutDayScreen(
         formTitle = stringResource(R.string.edit_workout_title),
         hasFabIcon = true,
         fabOnclick = {
-            
+            val workoutDay = viewModel.workoutDay
+            navController.navigate("AddExerciseToScheduleScreen/$workoutDay")
         }
     ) {
         Column(

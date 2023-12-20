@@ -16,7 +16,7 @@ class EditWorkoutViewModel(
 ) : AndroidViewModel(application) {
     private val workoutRepository: WorkoutDayRepository = WorkoutDayRepository(application)
 
-    private val workoutDay: String = savedStateHandle["workoutDay"]!!
+    val workoutDay: String = savedStateHandle["workoutDay"]!!
 
     var workoutObject = workoutRepository.getWorkout(Days.valueOf(workoutDay))
 
