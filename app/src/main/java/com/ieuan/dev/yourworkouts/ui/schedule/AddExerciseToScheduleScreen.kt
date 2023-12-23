@@ -26,7 +26,6 @@ import com.ieuan.dev.yourworkouts.model.AddExerciseToScheduleViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.TAG
-import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
 
