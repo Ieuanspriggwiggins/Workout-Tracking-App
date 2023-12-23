@@ -18,4 +18,10 @@ interface ExerciseScheduleLinkDao {
 
     @Query("SELECT e.* FROM exercise e WHERE e.id NOT IN (SELECT esl.exerciseId FROM exerciseschedulelink esl WHERE workoutDay = :workoutDay)")
     fun getExercisesNotInSchedule(workoutDay:String): Flow<List<Exercise>>
+
+    /**
+     * Get all the exercises added to the current schedule
+     */
+    @Query("SELECT e.* FROM exercise e WHERE e.id IN (SELECT esl.exerciseId FROM exerciseschedulelink esl WHERE workoutDAy = :workoutDay)")
+    fun getExerciseInSchedule(workoutDay: String): Flow<List<Exercise>>
 }

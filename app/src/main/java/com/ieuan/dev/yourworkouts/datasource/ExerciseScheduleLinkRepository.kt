@@ -17,4 +17,7 @@ class ExerciseScheduleLinkRepository(application: Application) {
     fun getExercisesNotInSchedule(workoutDay: String): Flow<List<Exercise>> =
         exerciseScheduleLinkDao.getExercisesNotInSchedule(workoutDay)
 
+    fun getExercisesInSchedule(workoutDay: String): Flow<List<Exercise>> =
+        exerciseScheduleLinkDao.getExerciseInSchedule(workoutDay)
+
 }
