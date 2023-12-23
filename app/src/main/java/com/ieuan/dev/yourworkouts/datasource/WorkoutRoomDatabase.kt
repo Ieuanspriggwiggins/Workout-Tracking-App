@@ -12,13 +12,19 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [Exercise::class, WorkoutDay::class],
+    entities = [
+        Exercise::class,
+        WorkoutDay::class,
+        ExerciseScheduleLink::class
+               ],
     version = 1,
     exportSchema = false)
 abstract class WorkoutRoomDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDayDao(): WorkoutDayDao
+
+    abstract fun exerciseScheduleLinkDao(): ExerciseScheduleLinkDao
 
     companion object {
         private var instance: WorkoutRoomDatabase? = null
