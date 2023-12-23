@@ -3,10 +3,12 @@ package com.ieuan.dev.yourworkouts.model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
+import com.ieuan.dev.yourworkouts.datasource.Days
 import com.ieuan.dev.yourworkouts.datasource.ExerciseRepository
+import com.ieuan.dev.yourworkouts.datasource.ExerciseScheduleLink
 import com.ieuan.dev.yourworkouts.datasource.ExerciseScheduleLinkRepository
-import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
-import com.ieuan.dev.yourworkouts.datasource.WorkoutDayRepository
+import kotlinx.coroutines.launch
 
 class AddExerciseToScheduleViewModel(
     application: Application,
@@ -17,6 +19,16 @@ class AddExerciseToScheduleViewModel(
 
     val workoutDay: String = savedStateHandle["workoutDay"]!!
 
-    //TODO: Make get exercises that are not in this schedule
+    val setOfExercises = mutableSetOf<Int>()
+
+    fun addExercisesToSchedule() {
+        viewModelScope.launch {
+            setOfExercises.forEach{ exercise ->
+                val link = ExerciseScheduleLink(Days.valueOf(workoutDay), exercise)
+                exerciseScheduleLinkRepository.insert(link)
+            }
+        }
+    }
+
     val exerciseList = exerciseScheduleLinkRepository.getExercisesNotInSchedule(workoutDay)
 }
