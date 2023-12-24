@@ -16,6 +16,9 @@ interface ExerciseScheduleLinkDao {
     @Delete
     suspend fun delete(exerciseScheduleLink: ExerciseScheduleLink)
 
+    @Query("DELETE FROM exerciseschedulelink WHERE id = :exerciseId AND workoutDay = :workoutDay")
+    suspend fun deleteExerciseByDayAndId(exerciseId: Int, workoutDay: String)
+
     @Query("SELECT e.* FROM exercise e WHERE e.id NOT IN (SELECT esl.exerciseId FROM exerciseschedulelink esl WHERE workoutDay = :workoutDay)")
     fun getExercisesNotInSchedule(workoutDay:String): Flow<List<Exercise>>
 

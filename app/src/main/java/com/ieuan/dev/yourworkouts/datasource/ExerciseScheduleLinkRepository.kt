@@ -14,6 +14,10 @@ class ExerciseScheduleLinkRepository(application: Application) {
         exerciseScheduleLinkDao.delete(exerciseScheduleLink)
     }
 
+    suspend fun deleteExerciseByDayAndId(exerciseId: Int, workoutDay: String){
+        exerciseScheduleLinkDao.deleteExerciseByDayAndId(exerciseId, workoutDay)
+    }
+
     fun getExercisesNotInSchedule(workoutDay: String): Flow<List<Exercise>> =
         exerciseScheduleLinkDao.getExercisesNotInSchedule(workoutDay)
 

@@ -33,12 +33,12 @@ import com.ieuan.dev.yourworkouts.datasource.Exercise
 @Composable
 fun ExerciseCard(
     exercise: Exercise,
-    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    extraContent: @Composable () -> Unit = {},
+    onClick: () -> Unit
 ){
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 32.dp),
+        modifier = modifier,
         shape = RoundedCornerShape(10.dp),
         onClick = onClick
     ){
@@ -119,6 +119,7 @@ fun ExerciseCard(
                     }
                 }
             }
+            extraContent()
         }
     }
 }

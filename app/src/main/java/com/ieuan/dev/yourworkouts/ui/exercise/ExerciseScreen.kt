@@ -1,6 +1,7 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -45,7 +46,12 @@ fun ExerciseScreen(
                 modifier = Modifier.padding(bottom = 42.dp)
             ){
                 exerciseList.forEach{exercise ->
-                    ExerciseCard(exercise = exercise) {
+                    ExerciseCard(
+                        exercise = exercise,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 32.dp)
+                    ) {
                         val id: Int = exercise.id
                         navController.navigate("editExercise/$id")
                     }
