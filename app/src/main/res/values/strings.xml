@@ -34,6 +34,10 @@
     <!-- Exercise Schedule Dialog -->
     <string name="exercise_schedule_dialog_dismiss">Dismiss</string>
 
+    <!-- Exercise Schedule Dialog -->
+    <string name="warning_disable_schedule_title">You cannot disable this workout day</string>
+    <string name="warning_disable_schedule_body">You have to have at least one workout day enabled</string>
+
     <!-- Input Labels -->
     <string name="exercise_name_input_label">Exercise Name</string>
     <string name="exercise_set_count_input_label">Number of Sets</string>

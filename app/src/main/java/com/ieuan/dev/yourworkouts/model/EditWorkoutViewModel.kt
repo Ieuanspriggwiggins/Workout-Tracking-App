@@ -41,14 +41,21 @@ class EditWorkoutViewModel(
     }
 
     /**
+     * Returns true if allowed to disable the workout day, false if not
+     * Can't disable if there is only one currently enabled workout day
+     */
+    fun isAllowedToDisable(): Boolean{
+        return workoutDayRepository.getNumberOfEnabledWorkouts() > 1
+    }
+
+    /**
      * Disables the workout day in the database and removes any links to exercises
      */
     fun disableWorkoutDay() {
         viewModelScope.launch {
-            if(workoutDayRepository.getNumberOfEnabledWorkouts() > 1){
-                workoutDayRepository.disableWorkoutDay(workoutDay)
-                exerciseScheduleLinkRepository.deleteExercisesForWorkoutDay(workoutDay)
-            }
+            workoutDayRepository.disableWorkoutDay(workoutDay)
+            exerciseScheduleLinkRepository.deleteExercisesForWorkoutDay(workoutDay)
+
         }
     }
 }

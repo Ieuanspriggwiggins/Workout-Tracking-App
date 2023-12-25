@@ -20,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,6 +38,7 @@ import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 import com.ieuan.dev.yourworkouts.model.EditWorkoutViewModel
+import com.ieuan.dev.yourworkouts.ui.components.AlertDialogComponent
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
 @Composable
@@ -45,10 +47,25 @@ fun EditWorkoutDayScreen(
     viewModel: EditWorkoutViewModel = viewModel()
 ) {
 
+    var alertDialogOpen by remember { mutableStateOf(false)}
+
     val workoutObject by viewModel.workoutObject.collectAsState(WorkoutDay())
     val exerciseList by viewModel.exerciseList.collectAsState(listOf())
 
     var expanded by remember { mutableStateOf(false)}
+
+    if(alertDialogOpen){
+        AlertDialogComponent(
+        title = stringResource(R.string.warning_disable_schedule_title),
+        content = stringResource(R.string.warning_disable_schedule_body),
+        onDismissRequest = { alertDialogOpen = false },
+        confirmButton = {
+            TextButton(onClick = { alertDialogOpen = false }) {
+                Text(text = stringResource(R.string.exercise_schedule_dialog_dismiss))
+            }
+        }
+        )
+    }
 
     FormScreenScaffold(
         navController = navController,
@@ -79,8 +96,14 @@ fun EditWorkoutDayScreen(
                             Text(text = stringResource(id = R.string.disable_workout_day_btn))
                         },
                         onClick = {
-                            viewModel.disableWorkoutDay()
-                            navController.popBackStack()
+                            if(viewModel.isAllowedToDisable()){
+                                viewModel.disableWorkoutDay()
+                                navController.popBackStack()
+                            }
+                            else{
+                                alertDialogOpen = true
+                                expanded = false
+                            }
                         }
                     )
                 }
