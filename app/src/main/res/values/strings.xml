@@ -24,6 +24,7 @@
     <string name="upload_img_btn">Upload Image</string>
     <string name="delete_exercise_btn">Delete Exercise</string>
     <string name="remove_exercise_btn">Remove Exercise</string>
+    <string name="disable_workout_day_btn">Remove Workout Day</string>
 
     <!-- Exercise Entry Error -->
     <string name="exercise_dialog_error_title">Required Fields</string>

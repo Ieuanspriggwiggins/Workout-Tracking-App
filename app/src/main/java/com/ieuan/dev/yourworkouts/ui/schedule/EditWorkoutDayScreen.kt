@@ -1,14 +1,10 @@
 package com.ieuan.dev.yourworkouts.ui.schedule
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.indication
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,12 +16,10 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,17 +31,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 import com.ieuan.dev.yourworkouts.model.EditWorkoutViewModel
-import com.ieuan.dev.yourworkouts.ui.components.ExerciseCard
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditWorkoutDayScreen(
     navController: NavController,
@@ -57,6 +48,8 @@ fun EditWorkoutDayScreen(
     val workoutObject by viewModel.workoutObject.collectAsState(WorkoutDay())
     val exerciseList by viewModel.exerciseList.collectAsState(listOf())
 
+    var expanded by remember { mutableStateOf(false)}
+
     FormScreenScaffold(
         navController = navController,
         formTitle = stringResource(R.string.edit_workout_title),
@@ -64,6 +57,34 @@ fun EditWorkoutDayScreen(
         fabOnclick = {
             val workoutDay = viewModel.workoutDay
             navController.navigate("AddExerciseToScheduleScreen/$workoutDay")
+        },
+        actions = {
+            Box{
+                IconButton(
+                    onClick = {
+                        expanded = !expanded
+                    }
+                ) {
+                    Icon(
+                        imageVector = (Icons.Filled.MoreVert),
+                        contentDescription = null
+                    )
+                }
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = {
+                            Text(text = stringResource(id = R.string.disable_workout_day_btn))
+                        },
+                        onClick = {
+                            viewModel.disableWorkoutDay()
+                            navController.popBackStack()
+                        }
+                    )
+                }
+            }
         }
     ) {
         Column(

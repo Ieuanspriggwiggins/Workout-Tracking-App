@@ -19,6 +19,7 @@ class EditWorkoutViewModel(
 ) : AndroidViewModel(application) {
     private val workoutRepository: WorkoutDayRepository = WorkoutDayRepository(application)
     private val exerciseScheduleLinkRepository = ExerciseScheduleLinkRepository(application)
+    private val workoutDayRepository = WorkoutDayRepository(application)
 
     val workoutDay: String = savedStateHandle["workoutDay"]!!
 
@@ -36,6 +37,16 @@ class EditWorkoutViewModel(
     fun removeExercise(exercise: Exercise) {
         viewModelScope.launch {
             exerciseScheduleLinkRepository.deleteExerciseByDayAndId(exercise.id, workoutDay)
+        }
+    }
+
+    /**
+     * Disables the workout day in the database and removes any links to exercises
+     */
+    fun disableWorkoutDay() {
+        viewModelScope.launch {
+            workoutDayRepository.disableWorkoutDay(workoutDay)
+            exerciseScheduleLinkRepository.deleteExercisesForWorkoutDay(workoutDay)
         }
     }
 }
