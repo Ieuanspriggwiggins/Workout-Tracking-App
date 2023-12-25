@@ -28,6 +28,9 @@ interface WorkoutDayDao {
     @Query("SELECT * FROM workout_day WHERE isEnabled = :state")
     fun getWorkoutByState(state: Boolean): Flow<List<WorkoutDay>>
 
+    @Query("SELECT COUNT(*) FROM workout_day WHERE isEnabled = 1")
+    fun getNumberOfEnabledWorkouts(): Int
+
     @Query("UPDATE workout_day SET isEnabled = 0 WHERE workoutDay = :workoutDay")
     suspend fun disableWorkoutDay(workoutDay: String)
 }

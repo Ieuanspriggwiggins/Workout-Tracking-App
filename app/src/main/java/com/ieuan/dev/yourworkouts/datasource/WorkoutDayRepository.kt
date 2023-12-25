@@ -16,6 +16,8 @@ class WorkoutDayRepository(application: Application) {
 
     fun getWorkouts(): Flow<List<WorkoutDay>> = workoutDayDao.getWorkouts()
 
+    fun getNumberOfEnabledWorkouts(): Int = workoutDayDao.getNumberOfEnabledWorkouts()
+
     suspend fun disableWorkoutDay(workoutDay: String) = workoutDayDao.disableWorkoutDay(workoutDay)
 
     fun getWorkoutsByState(state: Boolean):

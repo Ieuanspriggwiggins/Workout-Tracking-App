@@ -45,8 +45,10 @@ class EditWorkoutViewModel(
      */
     fun disableWorkoutDay() {
         viewModelScope.launch {
-            workoutDayRepository.disableWorkoutDay(workoutDay)
-            exerciseScheduleLinkRepository.deleteExercisesForWorkoutDay(workoutDay)
+            if(workoutDayRepository.getNumberOfEnabledWorkouts() > 1){
+                workoutDayRepository.disableWorkoutDay(workoutDay)
+                exerciseScheduleLinkRepository.deleteExercisesForWorkoutDay(workoutDay)
+            }
         }
     }
 }
