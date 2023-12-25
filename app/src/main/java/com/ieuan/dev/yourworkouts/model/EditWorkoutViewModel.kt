@@ -22,7 +22,7 @@ class EditWorkoutViewModel(
     private val workoutDayRepository = WorkoutDayRepository(application)
 
     val workoutDay: String = savedStateHandle["workoutDay"]!!
-
+    
     var workoutObject = workoutRepository.getWorkout(Days.valueOf(workoutDay))
 
     var workoutName by mutableStateOf("")

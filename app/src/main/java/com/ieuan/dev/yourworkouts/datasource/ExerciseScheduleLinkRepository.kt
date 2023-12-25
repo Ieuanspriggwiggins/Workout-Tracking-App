@@ -14,6 +14,9 @@ class ExerciseScheduleLinkRepository(application: Application) {
         exerciseScheduleLinkDao.delete(exerciseScheduleLink)
     }
 
+    suspend fun deleteScheduleLinksByExerciseId(exerciseId: Int) =
+        exerciseScheduleLinkDao.deleteScheduleLinksByExerciseId(exerciseId)
+
     suspend fun deleteExercisesForWorkoutDay(workoutDay:String) =
         exerciseScheduleLinkDao.deleteExercisesForWorkoutDay(workoutDay)
 

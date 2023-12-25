@@ -11,6 +11,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.datasource.ExerciseRepository
+import com.ieuan.dev.yourworkouts.datasource.ExerciseScheduleLinkRepository
 import com.ieuan.dev.yourworkouts.model.data.ExerciseData
 import com.ieuan.dev.yourworkouts.model.data.dataStateToExerciseEntity
 import kotlinx.coroutines.flow.Flow
@@ -23,6 +24,7 @@ class ExerciseViewModel(
     savedStateHandle: SavedStateHandle
 ): AndroidViewModel(application) {
     private val exerciseRepository: ExerciseRepository = ExerciseRepository(application)
+    private val exerciseScheduleLinkRepository = ExerciseScheduleLinkRepository(application)
     private val contentResolver = application.contentResolver
     private val flags: Int = Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
 
@@ -131,10 +133,12 @@ class ExerciseViewModel(
 
     /**
      * For deleting an exercise on the edit exercise screen
+     * also removes any links that exercise has with a schedule
      */
     fun deleteExercise() {
         viewModelScope.launch{
             exerciseId?.let{
+                exerciseScheduleLinkRepository.deleteScheduleLinksByExerciseId(exerciseId)
                 val exerciseObj =  exerciseRepository.getExercise(exerciseId)
                     .filterNotNull().first()
                 exerciseRepository.delete(exerciseObj)

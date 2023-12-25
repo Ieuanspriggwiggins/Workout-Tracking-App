@@ -25,6 +25,9 @@ interface ExerciseScheduleLinkDao {
     @Query("DELETE FROM exerciseschedulelink WHERE workoutDay = :workoutDay")
     suspend fun deleteExercisesForWorkoutDay(workoutDay: String)
 
+    @Query("DELETE FROM exerciseschedulelink WHERE exerciseId = :exerciseId")
+    suspend fun deleteScheduleLinksByExerciseId(exerciseId: Int)
+
     /**
      * Get all the exercises added to the current schedule
      */
