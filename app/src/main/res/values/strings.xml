@@ -16,6 +16,7 @@
     <string name="add_days_to_schedule_title">Add Day to Your Schedule</string>
     <string name="edit_workout_title">Edit Your Workout</string>
     <string name="add_exercise_workout_title">Add An Exercise</string>
+    <string name="home_screen_title">Your Workout:</string>
 
     <!-- Button Texts -->
     <string name = "add_btn">Add</string>

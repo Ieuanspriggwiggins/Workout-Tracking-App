@@ -75,6 +75,10 @@ fun EditWorkoutDayScreen(
             val workoutDay = viewModel.workoutDay
             navController.navigate("AddExerciseToScheduleScreen/$workoutDay")
         },
+        onSaveClick = {
+            viewModel.updateWorkoutDay()
+            navController.popBackStack()
+        },
         actions = {
             Box{
                 IconButton(
