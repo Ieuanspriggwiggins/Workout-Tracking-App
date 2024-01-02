@@ -5,6 +5,7 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -80,6 +81,11 @@ fun HomeScreen(
 @Composable
 fun ExerciseHomeScreenCard(exercise: Exercise) {
     if(exercise.isDropSet){
+        Text(
+            text = "Repeat " + exercise.numOfSets.toString() + " times",
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
         ExerciseCard(exercise)
     }else{
         ExerciseCard(exercise)
