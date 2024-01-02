@@ -51,6 +51,9 @@ class ExerciseViewModel(
 
     private val exerciseId: Int? = savedStateHandle["exerciseId"]
 
+    /**
+     * when the view model is created populate the exercise data with the exercise that is used
+     */
     init{
         //Populate the fields if we are editing an existing exercise
         exerciseId?.let{

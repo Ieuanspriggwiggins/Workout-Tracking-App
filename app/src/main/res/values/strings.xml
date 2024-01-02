@@ -18,6 +18,9 @@
     <string name="add_exercise_workout_title">Add An Exercise</string>
     <string name="home_screen_title">Your Workout:</string>
 
+    <!-- Screen Titles -->
+    <string name="warning_no_workout_homescreen">You have no workout today, to add one, create an exercise and add it to a workout day in \'schedule\'</string>
+
     <!-- Button Texts -->
     <string name = "add_btn">Add</string>
     <string name="save_btn">Save</string>

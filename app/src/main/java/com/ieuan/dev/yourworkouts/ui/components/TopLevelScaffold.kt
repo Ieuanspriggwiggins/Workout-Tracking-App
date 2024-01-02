@@ -54,6 +54,7 @@ fun TopLevelScaffold(
         topBar = {
             Text(
                 textAlign = TextAlign.Center,
+                lineHeight = 35.sp,
                 fontSize = 24.sp,
                 text = screenTitle,
                 modifier = Modifier

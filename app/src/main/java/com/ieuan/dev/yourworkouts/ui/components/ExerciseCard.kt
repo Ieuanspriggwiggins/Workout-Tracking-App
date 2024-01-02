@@ -35,7 +35,7 @@ fun ExerciseCard(
     exercise: Exercise,
     modifier: Modifier = Modifier,
     extraContent: @Composable () -> Unit = {},
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ){
     Card(
         modifier = modifier,
@@ -53,28 +53,34 @@ fun ExerciseCard(
                 modifier = Modifier
                     .padding(bottom = 12.dp)
             )
-            AsyncImage(
-                model = Uri.parse(exercise.exerciseImage),
-                contentDescription = exercise.exerciseName,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(10.dp))
-                    .heightIn(max = 200.dp)
-            )
-
-            Row(
-                modifier = Modifier
-                    .padding(top = 12.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ){
-                Text(text = stringResource(id = R.string.exercise_card_weight_label))
-                Text(
-                    text = exercise.exerciseWeight.toString() + "kg",
+            //If the user hasn't selected an image for the exercise, the image shouldn't be shown.
+            if(exercise.exerciseImage != "null"){
+                AsyncImage(
+                    model = Uri.parse(exercise.exerciseImage),
+                    contentDescription = exercise.exerciseName,
                     modifier = Modifier
-                        .padding(start = 5.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .heightIn(max = 200.dp)
                 )
             }
-            Divider(color = Color.Black)
+            //If the exercise isn't a drop set we show the weight.
+            if(!exercise.isDropSet){
+                Row(
+                    modifier = Modifier
+                        .padding(top = 12.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ){
+                    Text(text = stringResource(id = R.string.exercise_card_weight_label))
+                    Text(
+                        text = exercise.exerciseWeight.toString() + "kg",
+                        modifier = Modifier
+                            .padding(start = 5.dp)
+                    )
+                }
+            }
+
+            if(!exercise.isDropSet){ Divider(color = Color.Black) }
             Row(
                 modifier = Modifier
                     .padding(top = 8.dp)
@@ -87,6 +93,7 @@ fun ExerciseCard(
                     modifier = Modifier.padding(start = 5.dp)
                 )
             }
+            //If the exercise isn't a drop set
             if(!exercise.isDropSet){
                 Divider(color = Color.Black)
                 Row(
