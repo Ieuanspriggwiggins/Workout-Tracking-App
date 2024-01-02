@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -20,6 +21,7 @@ import java.util.Locale
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.datasource.Exercise
+import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 
 @Composable
 fun HomeScreen(
@@ -28,11 +30,22 @@ fun HomeScreen(
 ) {
 
     val exerciseList by viewModel.exerciseList.collectAsState(listOf())
+    val workoutDay by viewModel.workoutDay.collectAsState(initial = WorkoutDay())
+
+    var titleString: String = ""
+
+    //if the workout name is set for the workout day, show the name of the workout instead of the day
+    titleString = if(workoutDay.workoutName.isNotEmpty()){
+        stringResource(R.string.home_screen_title) + " " + workoutDay.workoutName
+    }else{
+        stringResource(R.string.home_screen_title) + viewModel.currentDayString
+    }
 
     TopLevelScaffold(
         navController = navController,
-        screenTitle = stringResource(R.string.home_screen_title) + viewModel.currentDayString
+        screenTitle = titleString
     ) {
+
         LazyColumn(
         ){
             items(exerciseList) {exercise ->

@@ -29,5 +29,6 @@ class HomeScreenViewModel(
 
     val exerciseList = scheduleLinkRepository.getExercisesInSchedule(currentDayEnglish.uppercase())
 
-
+    //Get the workout day object for the name of the workout
+    val workoutDay = workoutDayRepository.getWorkout(Days.valueOf(currentDayEnglish.uppercase()))
 }
