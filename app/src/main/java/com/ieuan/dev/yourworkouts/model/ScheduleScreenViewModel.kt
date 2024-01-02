@@ -15,19 +15,4 @@ class ScheduleScreenViewModel(application: Application) :AndroidViewModel(applic
 
     //List of days/workouts on the schedule screen
     val enabledDayList = workoutDayRepository.getWorkoutsByState(true)
-
-    /**
-     * Check if the database table is empty, if so, then needs populating
-     * as the app has been started for the first time (or the database has been
-     * deleted through some other process)
-     */
-    init{
-        viewModelScope.launch{
-            val testList: List<WorkoutDay> = workoutDayRepository.getWorkouts().first()
-            //Assume it is empty, and populate, otherwise continue as normal
-            if(testList.isEmpty()){
-                workoutDayRepository.populateDefaultValues()
-            }
-        }
-    }
 }

@@ -18,8 +18,9 @@
     <string name="add_exercise_workout_title">Add An Exercise</string>
     <string name="home_screen_title">Your Workout:</string>
 
-    <!-- Screen Titles -->
+    <!-- Nothing to display warnings -->
     <string name="warning_no_workout_homescreen">You have no workout today, to add one, create an exercise and add it to a workout day in \'schedule\'</string>
+    <string name="warning_no_exercise_list">You have no exercises currently created, press the + button to create one</string>
 
     <!-- Button Texts -->
     <string name = "add_btn">Add</string>
@@ -63,6 +64,8 @@
     <string name="exercise_card_set_label">Set Count:</string>
     <string name="exercise_card_rep_label">Rep Count:</string>
     <string name="exercise_card_drop_set_label">Drop Sets:</string>
+    <string name="exercise_drop_set_homescreen_repeat">Repeat</string>
+
 
     <!-- Days of week -->
     <string name="day_monday">Monday</string>

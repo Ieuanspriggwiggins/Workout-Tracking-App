@@ -128,15 +128,6 @@ fun EditWorkoutDayScreen(
                 onValueChange = {
                     viewModel.workoutName = it
                 },
-                supportingText = {
-                    var workoutName = "None"
-                    if(workoutObject.workoutName.isNotEmpty()){
-                        workoutName = workoutObject.workoutName
-                    }
-
-                    Text(text = stringResource(R.string.currently_support_text)
-                            + ":" + workoutName)
-                },
                 trailingIcon = {
                     if(viewModel.workoutName.isNotEmpty()){
                         IconButton(onClick = { viewModel.workoutName = "" }) {
@@ -161,15 +152,6 @@ fun EditWorkoutDayScreen(
                 value = viewModel.workoutLength,
                 onValueChange = {
                     viewModel.workoutLength = it
-                },
-                supportingText = {
-                    var workoutName = "None"
-                    if(workoutObject.workoutLength.isNotEmpty()){
-                        workoutName = workoutObject.workoutLength
-                    }
-
-                    Text(text = stringResource(R.string.currently_support_text)
-                            + ":" + workoutName)
                 },
                 trailingIcon = {
                     if(viewModel.workoutLength.isNotEmpty()){

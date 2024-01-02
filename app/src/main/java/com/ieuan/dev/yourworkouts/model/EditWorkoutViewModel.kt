@@ -12,6 +12,7 @@ import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.datasource.ExerciseScheduleLinkRepository
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDayRepository
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class EditWorkoutViewModel(
@@ -31,6 +32,22 @@ class EditWorkoutViewModel(
 
     //List of the exercises that are added to the currently editing day/workout
     val exerciseList = exerciseScheduleLinkRepository.getExercisesInSchedule(workoutDay)
+
+    var workoutDayObj: WorkoutDay? = null
+
+    /**
+     * When the view model is created, populate the mutable values with the current existing
+     * for the object.
+     */
+    init {
+        viewModelScope.launch {
+            workoutDayObj = workoutRepository.getWorkout(Days.valueOf(workoutDay)).first()
+            workoutDayObj?.let {
+                workoutName = workoutDayObj!!.workoutName
+                workoutLength = workoutDayObj!!.workoutLength
+            }
+        }
+    }
 
     /**
      * Updates the workout day with the entered name and workout length

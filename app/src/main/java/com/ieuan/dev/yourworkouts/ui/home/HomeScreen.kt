@@ -1,7 +1,5 @@
 package com.ieuan.dev.yourworkouts.ui.home
 
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,12 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.model.HomeScreenViewModel
 import com.ieuan.dev.yourworkouts.ui.components.TopLevelScaffold
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.datasource.Exercise
@@ -40,18 +35,17 @@ fun HomeScreen(
     val exerciseList by viewModel.exerciseList.collectAsState(listOf())
     val workoutDay by viewModel.workoutDay.collectAsState(initial = WorkoutDay())
 
-    var titleString: String = ""
+    var title: String = ""
 
-    //if the workout name is set for the workout day, show the name of the workout instead of the day
-    titleString = if(workoutDay.workoutName.isNotEmpty()){
-        stringResource(R.string.home_screen_title) + " " + workoutDay.workoutName
-    }else{
-        stringResource(R.string.home_screen_title) + viewModel.currentDayString
-    }
+//    title = if(workoutDay.workoutName.isNotEmpty()){
+//        workoutDay.workoutName
+//    }else{
+//        viewModel.currentDayString
+//    }
 
     TopLevelScaffold(
         navController = navController,
-        screenTitle = titleString
+        screenTitle = title
     ) {
         //If the exercise list is empty, show a prompt saying no exercises have been assigned to this workout day
         if(exerciseList.isEmpty()){
@@ -82,12 +76,18 @@ fun HomeScreen(
 fun ExerciseHomeScreenCard(exercise: Exercise) {
     if(exercise.isDropSet){
         Text(
-            text = "Repeat " + exercise.numOfSets.toString() + " times",
+            text = stringResource(R.string.exercise_drop_set_homescreen_repeat) + ": " + exercise.numOfSets.toString(),
             textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 6.dp),
+            fontSize = 18.sp
         )
         ExerciseCard(exercise)
     }else{
-        ExerciseCard(exercise)
+        ExerciseCard(
+            exercise = exercise,
+            modifier = Modifier.padding(vertical = 12.dp)
+        )
     }
 }
