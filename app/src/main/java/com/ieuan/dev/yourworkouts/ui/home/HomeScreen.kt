@@ -25,6 +25,7 @@ import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 import com.ieuan.dev.yourworkouts.ui.components.ExerciseCard
+import kotlinx.coroutines.flow.collect
 
 @Composable
 fun HomeScreen(
@@ -33,15 +34,14 @@ fun HomeScreen(
 ) {
 
     val exerciseList by viewModel.exerciseList.collectAsState(listOf())
-    val workoutDay by viewModel.workoutDay.collectAsState(initial = WorkoutDay())
 
-    var title: String = ""
+    val workoutDay by viewModel.workoutDay.collectAsState(WorkoutDay())
 
-//    title = if(workoutDay.workoutName.isNotEmpty()){
-//        workoutDay.workoutName
-//    }else{
-//        viewModel.currentDayString
-//    }
+    var title: String = viewModel.currentDayString
+
+    if(workoutDay.workoutName.isNotEmpty()) {
+        title = workoutDay.workoutName
+    }
 
     TopLevelScaffold(
         navController = navController,
