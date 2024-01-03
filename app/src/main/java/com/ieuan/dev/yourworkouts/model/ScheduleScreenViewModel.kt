@@ -1,12 +1,12 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * View model class for the schedule screen (top level screen)
+ */
 package com.ieuan.dev.yourworkouts.model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
-import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDayRepository
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
 
 class ScheduleScreenViewModel(application: Application) :AndroidViewModel(application)
 {

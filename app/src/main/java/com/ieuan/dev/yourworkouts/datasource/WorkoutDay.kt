@@ -1,9 +1,12 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * file contains the entity data class for the workout days in the
+ * application. Also contains an enum class representing the days of the week
+ */
+
 package com.ieuan.dev.yourworkouts.datasource
 
 import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.ieuan.dev.yourworkouts.R
@@ -20,7 +23,7 @@ data class WorkoutDay(
 /**
  * Enum used for clarification of the day a workout falls on
  */
-enum class Days(){
+enum class Days{
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY;
 
     /**

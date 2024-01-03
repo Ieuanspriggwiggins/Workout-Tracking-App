@@ -1,3 +1,9 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Composable for the navigation bar the bottom of the screen on the
+ * top level of the application
+ */
+
 package com.ieuan.dev.yourworkouts.ui.navigation
 
 import androidx.compose.material.icons.Icons
@@ -25,7 +31,8 @@ import com.ieuan.dev.yourworkouts.ui.components.IconGroup
 fun MainNavigationBar(
     navController: NavController
 ) {
-
+    //Specifies the icons and labels in a map for the top level destinations in the
+    //navigation bar
     val icons = mapOf(
         Screen.Home to IconGroup(
             filledIcon = Icons.Filled.Home,

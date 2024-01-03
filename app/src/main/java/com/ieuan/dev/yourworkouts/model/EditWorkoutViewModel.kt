@@ -1,3 +1,9 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * View model class for the screen for editing a workout day (changing the name
+ * or the length of the workout)
+ */
+
 package com.ieuan.dev.yourworkouts.model
 
 import android.app.Application
@@ -23,17 +29,20 @@ class EditWorkoutViewModel(
     private val exerciseScheduleLinkRepository = ExerciseScheduleLinkRepository(application)
     private val workoutDayRepository = WorkoutDayRepository(application)
 
+    //The workout day as a string (i.e. 'THURSDAY'), specified as not null because
+    //the screen cannot be called without this information
     val workoutDay: String = savedStateHandle["workoutDay"]!!
 
-    var workoutObject = workoutRepository.getWorkout(Days.valueOf(workoutDay))
-
+    //A source of truth for the workout name and the length used by the UI, handles state
     var workoutName by mutableStateOf("")
     var workoutLength by mutableStateOf("")
 
     //List of the exercises that are added to the currently editing day/workout
     val exerciseList = exerciseScheduleLinkRepository.getExercisesInSchedule(workoutDay)
 
-    var workoutDayObj: WorkoutDay? = null
+    //The workout day object for getting the existing values from the database for
+    //the specified workout day
+    private var workoutDayObj: WorkoutDay? = null
 
     /**
      * When the view model is created, populate the mutable values with the current existing

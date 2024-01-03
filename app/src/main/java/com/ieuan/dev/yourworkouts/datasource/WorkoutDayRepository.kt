@@ -1,3 +1,9 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * the workout day repository responsible for interacting with the workout day
+ * in the database.
+ */
+
 package com.ieuan.dev.yourworkouts.datasource
 
 import android.app.Application
@@ -23,6 +29,10 @@ class WorkoutDayRepository(application: Application) {
     fun getWorkoutsByState(state: Boolean):
             Flow<List<WorkoutDay>> = workoutDayDao.getWorkoutByState(state)
 
+    /**
+     * Uses the update function for workout days iteratively through a given list
+     * of workout days
+     */
     suspend fun updateFromList(list: List<WorkoutDay>){
         list.forEach{ workout ->
             update(workout)

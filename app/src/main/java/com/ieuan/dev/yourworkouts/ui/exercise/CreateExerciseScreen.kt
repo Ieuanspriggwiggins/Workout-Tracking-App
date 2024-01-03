@@ -1,20 +1,18 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * The screen for creating an exercise and adding it to the application
+ */
+
 package com.ieuan.dev.yourworkouts.ui.exercise
 
-import android.util.Log
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.R
-import com.ieuan.dev.yourworkouts.TAG
 import com.ieuan.dev.yourworkouts.model.ExerciseViewModel
-import com.ieuan.dev.yourworkouts.model.data.ExerciseData
 import com.ieuan.dev.yourworkouts.ui.components.AlertDialogComponent
 import com.ieuan.dev.yourworkouts.ui.components.ExerciseEditCreateForm
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
@@ -26,6 +24,8 @@ fun CreateExerciseScreen(
     viewModel: ExerciseViewModel = viewModel()
 ) {
     val dataState = viewModel.dataState
+    //if the currently added values are not correct, display the alert dialog specifying
+    //that the user input is invalid
     if(viewModel.isFieldEmptyError){
         AlertDialogComponent(
             title = stringResource(id = R.string.exercise_dialog_error_title),

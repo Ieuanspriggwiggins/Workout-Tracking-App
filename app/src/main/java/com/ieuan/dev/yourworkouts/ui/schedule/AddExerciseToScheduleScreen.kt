@@ -1,3 +1,8 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Composable for screen to add an exercise to a workout day
+ */
+
 package com.ieuan.dev.yourworkouts.ui.schedule
 
 import android.util.Log
@@ -35,6 +40,7 @@ fun AddExerciseToScheduleScreen(
     navController: NavController,
     viewModel: AddExerciseToScheduleViewModel = viewModel()
 ){
+    //List of exercises that don't exist in the current workout day
     val list by viewModel.exerciseList.collectAsState(listOf())
 
     FormScreenScaffold(

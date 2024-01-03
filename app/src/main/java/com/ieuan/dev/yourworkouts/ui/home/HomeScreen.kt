@@ -1,3 +1,10 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Composable for top level home screen on the application, displays the exercises
+ * the user has added to the workout day for that specific day. Also displays the workout
+ * name and length if the user has specified such.
+ */
+
 package com.ieuan.dev.yourworkouts.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
@@ -25,7 +32,6 @@ import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 import com.ieuan.dev.yourworkouts.ui.components.ExerciseCard
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun HomeScreen(
@@ -39,6 +45,8 @@ fun HomeScreen(
 
     var title: String = viewModel.currentDayString
 
+    //If the user has set a workout name for the workout, replace the default title
+    //for the day and show the workout name instead.
     if(workoutDay.workoutName.isNotEmpty()) {
         title = workoutDay.workoutName
     }
@@ -74,6 +82,8 @@ fun HomeScreen(
 
 @Composable
 fun ExerciseHomeScreenCard(exercise: Exercise) {
+    //If the exercise is a drop set, show the amount of times that drop set
+    //exercise needs to be repeated.
     if(exercise.isDropSet){
         Text(
             text = stringResource(R.string.exercise_drop_set_homescreen_repeat) + ": " + exercise.numOfSets.toString(),

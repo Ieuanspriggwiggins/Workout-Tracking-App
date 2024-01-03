@@ -1,3 +1,8 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Reusable composable component for the form for entry of the exercise information
+ */
+
 package com.ieuan.dev.yourworkouts.ui.components
 
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -24,7 +29,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.AndroidViewModel
 import coil.compose.AsyncImage
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.model.ExerciseViewModel
@@ -32,9 +36,7 @@ import com.ieuan.dev.yourworkouts.model.data.ExerciseData
 import com.ieuan.dev.yourworkouts.model.data.isValidFloat
 import com.ieuan.dev.yourworkouts.model.data.isValidInt
 
-/**
- * The form components used for input fields on the edit and create exercise form
- */
+
 @Composable
 fun ExerciseEditCreateForm(
     dataState: ExerciseData,

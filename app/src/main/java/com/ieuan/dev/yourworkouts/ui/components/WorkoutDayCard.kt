@@ -1,3 +1,10 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * The workout day card displayed on the schedule top level screen. Contains the day
+ * of the workout day and the name of the workout day that is specified by the user
+ * (if they wish)
+ */
+
 package com.ieuan.dev.yourworkouts.ui.components
 
 import androidx.compose.foundation.layout.Arrangement

@@ -1,3 +1,8 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * composable for the schedule screen on the application
+ */
+
 package com.ieuan.dev.yourworkouts.ui.schedule
 
 import androidx.compose.foundation.layout.Column

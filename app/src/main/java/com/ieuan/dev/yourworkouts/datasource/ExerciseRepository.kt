@@ -1,3 +1,8 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Repository class for interacting with the exercise data access object
+ */
+
 package com.ieuan.dev.yourworkouts.datasource
 
 import android.app.Application

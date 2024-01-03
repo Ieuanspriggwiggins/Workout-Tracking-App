@@ -1,3 +1,9 @@
+/**
+ * @author ieuan sprigg-wiggins
+ *
+ * File contains the entity data class for the exercises in the database
+ */
+
 package com.ieuan.dev.yourworkouts.datasource
 
 import androidx.room.Entity

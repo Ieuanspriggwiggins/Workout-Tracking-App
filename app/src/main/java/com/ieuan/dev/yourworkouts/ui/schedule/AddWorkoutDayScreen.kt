@@ -1,6 +1,11 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Composable for the screen for adding a workout day to the users list of
+ * workout days they have enabled
+ */
+
 package com.ieuan.dev.yourworkouts.ui.schedule
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable

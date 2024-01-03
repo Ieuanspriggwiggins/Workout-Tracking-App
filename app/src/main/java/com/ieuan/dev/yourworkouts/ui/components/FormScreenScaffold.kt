@@ -1,3 +1,8 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Reusable composable component for the form scaffold used throughout the application
+ */
+
 package com.ieuan.dev.yourworkouts.ui.components
 
 import androidx.compose.foundation.layout.Row

@@ -1,3 +1,10 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Composable used on the screen to add a workout day to users enabled workout days
+ * contains a checkbox to specify the state set by the user for the specific workout
+ * day
+ */
+
 package com.ieuan.dev.yourworkouts.ui.components
 
 import androidx.compose.foundation.layout.Arrangement

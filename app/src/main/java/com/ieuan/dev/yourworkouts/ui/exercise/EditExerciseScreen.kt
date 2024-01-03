@@ -1,6 +1,10 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Composable for the screen to edit an existing exercise in the application
+ */
+
 package com.ieuan.dev.yourworkouts.ui.exercise
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -19,7 +23,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ieuan.dev.yourworkouts.R
-import com.ieuan.dev.yourworkouts.TAG
 import com.ieuan.dev.yourworkouts.model.ExerciseViewModel
 import com.ieuan.dev.yourworkouts.ui.components.AlertDialogComponent
 import com.ieuan.dev.yourworkouts.ui.components.ExerciseEditCreateForm
@@ -32,8 +35,8 @@ fun EditExerciseScreen(
 ) {
     val dataState = viewModel.dataState
 
+    //Whether or not the delete menu box is being displayed or not.
     var expanded by remember {mutableStateOf(false)}
-
 
     if(viewModel.isFieldEmptyError){
         AlertDialogComponent(

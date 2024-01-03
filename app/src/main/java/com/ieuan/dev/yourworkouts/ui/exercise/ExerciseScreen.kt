@@ -1,3 +1,8 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Top level screen for displaying the existing exercises in the application.
+ */
+
 package com.ieuan.dev.yourworkouts.ui.exercise
 
 import androidx.compose.foundation.layout.Arrangement
@@ -16,14 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.model.ExerciseViewModel
 import com.ieuan.dev.yourworkouts.ui.components.ExerciseCard
 import com.ieuan.dev.yourworkouts.ui.components.TopLevelScaffold
-import com.ieuan.dev.yourworkouts.ui.navigation.Screen
 
 
 @Composable
@@ -39,10 +42,12 @@ fun ExerciseScreen(
         screenTitle = stringResource(id = R.string.exercise_screen_title),
         hasFabIcon = true,
         fabOnclick = {
-            navController.navigate(Screen.CreateExercise.route)
+            navController.navigate("createExercise")
         }
     ) {
 
+        //if the exercise list is empty (none exist in the application)
+        //display a message stating this
         if(exerciseList.isEmpty()){
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -64,6 +69,8 @@ fun ExerciseScreen(
             Column(
                 modifier = Modifier.padding(bottom = 42.dp)
             ){
+                //Loop through each exercise in the list and display the card for that
+                //exercise, passing the exercise as a parameter
                 exerciseList.forEach{exercise ->
                     ExerciseCard(
                         exercise = exercise,

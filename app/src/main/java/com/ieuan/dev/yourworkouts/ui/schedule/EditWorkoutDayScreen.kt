@@ -1,3 +1,9 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Composable for the edit a workout day screen, changing the workout name, length and
+ * adding exercises to the workout day
+ */
+
 package com.ieuan.dev.yourworkouts.ui.schedule
 
 import androidx.compose.foundation.layout.Arrangement
@@ -36,7 +42,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.datasource.Exercise
-import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 import com.ieuan.dev.yourworkouts.model.EditWorkoutViewModel
 import com.ieuan.dev.yourworkouts.ui.components.AlertDialogComponent
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
@@ -49,7 +54,6 @@ fun EditWorkoutDayScreen(
 
     var alertDialogOpen by remember { mutableStateOf(false)}
 
-    val workoutObject by viewModel.workoutObject.collectAsState(WorkoutDay())
     val exerciseList by viewModel.exerciseList.collectAsState(listOf())
 
     var expanded by remember { mutableStateOf(false)}

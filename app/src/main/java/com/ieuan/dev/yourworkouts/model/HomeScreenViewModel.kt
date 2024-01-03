@@ -1,3 +1,8 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * View model class for the home screen of the application.
+ */
+
 package com.ieuan.dev.yourworkouts.model
 
 import android.app.Application
@@ -12,6 +17,7 @@ import java.util.Locale
 class HomeScreenViewModel(
     application: Application
 ): AndroidViewModel(application) {
+    //Required repositories to get relevant data to display
     private val workoutDayRepository = WorkoutDayRepository(application)
     private val scheduleLinkRepository = ExerciseScheduleLinkRepository(application)
 
@@ -25,7 +31,9 @@ class HomeScreenViewModel(
     //Use the days enum to get the current day from the strings xml file for language localisation
     val currentDayString = Days.valueOf(currentDayEnglish.uppercase()).dayToString(application)
 
+    //The list of exercises for the current workout day
     val exerciseList = scheduleLinkRepository.getExercisesInSchedule(currentDayEnglish.uppercase())
 
+    //The workout day object for the name and length details
     val workoutDay = workoutDayRepository.getWorkout(Days.valueOf(currentDayEnglish.uppercase()))
 }

@@ -1,4 +1,5 @@
 /**
+ * @author ieuan sprigg-wiggins
  * The top level scaffold displayed on the main three screens for the app
  */
 

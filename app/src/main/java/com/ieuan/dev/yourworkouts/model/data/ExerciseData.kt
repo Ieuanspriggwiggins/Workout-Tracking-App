@@ -1,4 +1,5 @@
 /**
+ * @author ieuan sprigg-wiggins
  * File contains a data class for the exeercise and some useful
  * functions that are used across different screens for exercises
  */
@@ -19,10 +20,16 @@ data class ExerciseData(
     var exerciseDropSetWeightThree: String = "",
 )
 
+/**
+ * Returns whether a value is a valid int or not
+ */
 fun isValidInt(s: String): Boolean {
     return s.toIntOrNull() != null
 }
 
+/**
+ * Returns whether a value is a valid float or not
+ */
 fun isValidFloat(s: String): Boolean {
     return s.toFloatOrNull() != null
 }

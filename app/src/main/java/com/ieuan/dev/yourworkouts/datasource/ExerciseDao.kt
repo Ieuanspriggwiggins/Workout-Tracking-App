@@ -1,3 +1,8 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Contains interface for the data access object for the exercises in the database
+ */
+
 package com.ieuan.dev.yourworkouts.datasource
 
 import androidx.room.Dao
@@ -19,9 +24,15 @@ interface ExerciseDao {
     @Delete
     suspend fun delete(exercise: Exercise)
 
+    /**
+     * Returns an exercise by its specific ID in the database
+     */
     @Query("SELECT * FROM exercise WHERE id = :id")
     fun getExercise(id: Int): Flow<Exercise>
 
+    /**
+     * Returns a list of all exercises in the database
+     */
     @Query("SELECT * FROM exercise")
     fun getExerciseList(): Flow<List<Exercise>>
 }

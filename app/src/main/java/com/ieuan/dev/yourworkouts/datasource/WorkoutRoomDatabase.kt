@@ -1,15 +1,13 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Specifies the database schema for the application
+ */
 package com.ieuan.dev.yourworkouts.datasource
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @Database(
     entities = [
@@ -21,36 +19,29 @@ import kotlinx.coroutines.launch
     exportSchema = false)
 abstract class WorkoutRoomDatabase : RoomDatabase() {
 
+    //references to the data access objects for the database
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDayDao(): WorkoutDayDao
-
     abstract fun exerciseScheduleLinkDao(): ExerciseScheduleLinkDao
 
+    //Companion object for creating an instance of the database.
     companion object {
         private var instance: WorkoutRoomDatabase? = null
-        private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
+        //Synchronized so only one version of the database is created in the
+        //application
         @Synchronized
         fun getDatabase(context: Context): WorkoutRoomDatabase? {
             if(instance == null){
-                instance = Room.databaseBuilder<WorkoutRoomDatabase>(
+                instance = Room.databaseBuilder(
                     context.applicationContext,
                     WorkoutRoomDatabase::class.java,
                     "workout_db"
                 )
                     .allowMainThreadQueries()
-                    .addCallback(roomDatabaseCallback(context))
                     .build()
             }
             return instance
-        }
-
-        private fun roomDatabaseCallback(context: Context): Callback {
-            return object: Callback() {
-                override fun onCreate(db: SupportSQLiteDatabase) {
-                    super.onCreate(db)
-                }
-            }
         }
     }
 }

@@ -1,3 +1,9 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Reusable composable component for the alert dialogs across the
+ * application
+ */
+
 package com.ieuan.dev.yourworkouts.ui.components
 
 import androidx.compose.foundation.layout.padding

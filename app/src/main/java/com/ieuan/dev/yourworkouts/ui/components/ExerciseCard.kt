@@ -1,28 +1,29 @@
+/**
+ * @author ieuan sprigg-wiggins
+ * Reusable composable component for displaying exercises data and image
+ * for the user interface
+ */
+
 package com.ieuan.dev.yourworkouts.ui.components
 
 import android.net.Uri
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -80,6 +81,7 @@ fun ExerciseCard(
                 }
             }
 
+            //if the exercise weight isn't being displayed, we don't need this divider
             if(!exercise.isDropSet){ Divider(color = Color.Black) }
             Row(
                 modifier = Modifier
@@ -110,7 +112,7 @@ fun ExerciseCard(
                 }
             }else{
                 Divider(color = Color.Black)
-                Column(){
+                Column{
                     Text(
                         text = stringResource(id = R.string.exercise_card_drop_set_label),
                         modifier = Modifier.fillMaxWidth(),
@@ -126,6 +128,7 @@ fun ExerciseCard(
                     }
                 }
             }
+            //Extra, can be used if further content is required below the card
             extraContent()
         }
     }
