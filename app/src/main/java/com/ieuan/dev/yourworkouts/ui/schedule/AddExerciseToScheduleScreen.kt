@@ -26,11 +26,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.model.AddExerciseToScheduleViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.TAG
+import com.ieuan.dev.yourworkouts.ui.components.ExerciseCard
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
 
@@ -58,14 +60,20 @@ fun AddExerciseToScheduleScreen(
         ) {
             list.forEach{exercise ->
                 var checked by remember {mutableStateOf(false)}
+                var isDialogOpened by remember {mutableStateOf(false)}
 
+                if(isDialogOpened){
+                    Dialog(onDismissRequest = {isDialogOpened = !isDialogOpened}) {
+                        ExerciseCard(exercise = exercise)
+                    }
+                }
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 12.dp),
                     shape = RoundedCornerShape(0),
                     onClick = {
-
+                        isDialogOpened = true
                     }
 
                 ) {
