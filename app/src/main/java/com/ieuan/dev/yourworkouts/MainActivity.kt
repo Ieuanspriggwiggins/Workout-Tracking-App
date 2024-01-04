@@ -74,6 +74,7 @@ class MainActivity : ComponentActivity() {
     fun WorkoutAppStart() {
         val navController = rememberNavController()
 
+        //Start with the loading screen when the app first opens
         NavHost(navController = navController, startDestination = "loadingscreen"){
             composable("loadingscreen") { LoadingScreen() }
             composable("home") { HomeScreen(navController = navController)}
