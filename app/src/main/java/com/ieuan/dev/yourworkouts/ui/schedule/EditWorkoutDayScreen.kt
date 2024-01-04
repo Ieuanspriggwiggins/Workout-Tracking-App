@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -38,12 +39,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.ieuan.dev.yourworkouts.R
 import com.ieuan.dev.yourworkouts.datasource.Exercise
 import com.ieuan.dev.yourworkouts.model.EditWorkoutViewModel
 import com.ieuan.dev.yourworkouts.ui.components.AlertDialogComponent
+import com.ieuan.dev.yourworkouts.ui.components.ExerciseCard
 import com.ieuan.dev.yourworkouts.ui.components.FormScreenScaffold
 
 @Composable
@@ -179,18 +182,29 @@ fun EditWorkoutDayScreen(
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExerciseScheduleCard(
     exercise: Exercise,
     viewModel: EditWorkoutViewModel
 ) {
     var expanded by remember {mutableStateOf(false)}
+    var dialogOpened by remember {mutableStateOf(false)}
+
+    if(dialogOpened){
+        Dialog(onDismissRequest = {dialogOpened = false}) {
+            ExerciseCard(exercise = exercise)
+        }
+    }
 
     Card(
         shape = RoundedCornerShape(0),
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 10.dp, bottom = 4.dp),
+        onClick = {
+            dialogOpened = true
+        }
 
     ){
         Row(
