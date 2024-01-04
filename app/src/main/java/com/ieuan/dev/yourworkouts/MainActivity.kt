@@ -15,8 +15,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import coil.compose.AsyncImagePainter
-import com.ieuan.dev.yourworkouts.datasource.Days
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDay
 import com.ieuan.dev.yourworkouts.datasource.WorkoutDayRepository
 import com.ieuan.dev.yourworkouts.ui.exercise.CreateExerciseScreen
@@ -29,11 +27,10 @@ import com.ieuan.dev.yourworkouts.ui.schedule.AddWorkoutDayScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.EditWorkoutDayScreen
 import com.ieuan.dev.yourworkouts.ui.schedule.ScheduleScreen
 import com.ieuan.dev.yourworkouts.ui.theme.YourWorkoutsTheme
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-val TAG: String = "TAG_SC"
+const val TAG: String = "TAG_SC"
 
 class MainActivity : ComponentActivity() {
 
