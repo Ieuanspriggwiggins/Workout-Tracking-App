@@ -53,6 +53,6 @@ interface WorkoutDayDao {
      * Updates a workout to a disabled state by the workout day that is passed as
      * an argument into the function
      */
-    @Query("UPDATE workout_day SET isEnabled = 0 WHERE workoutDay = :workoutDay")
+    @Query("UPDATE workout_day SET isEnabled=0, workoutName=\"\", workoutLength=\"\" WHERE workoutDay = :workoutDay")
     suspend fun disableWorkoutDay(workoutDay: String)
 }

@@ -55,6 +55,15 @@ fun HomeScreen(
         navController = navController,
         screenTitle = title
     ) {
+        if(workoutDay.workoutLength.isNotEmpty()){
+            Text(
+                text = workoutDay.workoutLength,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth(),
+                fontSize = 24.sp
+            )
+        }
         //If the exercise list is empty, show a prompt saying no exercises have been assigned to this workout day
         if(exerciseList.isEmpty()){
             Column(
@@ -71,7 +80,7 @@ fun HomeScreen(
         }
 
         LazyColumn(
-            modifier = Modifier.padding(12.dp)
+            modifier = Modifier.padding(top = 24.dp, start = 12.dp, end = 12.dp, bottom = 12.dp)
         ){
             items(exerciseList) {exercise ->
                 ExerciseHomeScreenCard(exercise = exercise)
@@ -93,7 +102,23 @@ fun ExerciseHomeScreenCard(exercise: Exercise) {
                 .padding(bottom = 6.dp),
             fontSize = 18.sp
         )
-        ExerciseCard(exercise)
+        Text(
+            text = stringResource(R.string.drop_set_rest_set),
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 6.dp),
+            fontSize = 16.sp
+        )
+        ExerciseCard(
+            exercise = exercise,
+            extraContent = {
+                Text(
+                    text = stringResource(R.string.drop_set_rest_rep),
+                    modifier = Modifier.padding(top = 12.dp)
+                )
+            }
+        )
     }else{
         ExerciseCard(
             exercise = exercise,

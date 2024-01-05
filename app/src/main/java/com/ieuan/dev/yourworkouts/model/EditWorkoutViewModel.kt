@@ -25,7 +25,6 @@ class EditWorkoutViewModel(
     application: Application,
     savedStateHandle: SavedStateHandle
 ) : AndroidViewModel(application) {
-    private val workoutRepository: WorkoutDayRepository = WorkoutDayRepository(application)
     private val exerciseScheduleLinkRepository = ExerciseScheduleLinkRepository(application)
     private val workoutDayRepository = WorkoutDayRepository(application)
 
@@ -50,7 +49,7 @@ class EditWorkoutViewModel(
      */
     init {
         viewModelScope.launch {
-            workoutDayObj = workoutRepository.getWorkout(Days.valueOf(workoutDay)).first()
+            workoutDayObj = workoutDayRepository.getWorkout(Days.valueOf(workoutDay)).first()
             workoutDayObj?.let {
                 workoutName = workoutDayObj!!.workoutName
                 workoutLength = workoutDayObj!!.workoutLength

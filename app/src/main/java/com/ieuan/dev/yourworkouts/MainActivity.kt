@@ -2,6 +2,7 @@ package com.ieuan.dev.yourworkouts
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -74,9 +75,18 @@ class MainActivity : ComponentActivity() {
         //Start with the loading screen when the app first opens
         NavHost(navController = navController, startDestination = "loadingscreen"){
             composable("loadingscreen") { LoadingScreen() }
-            composable("home") { HomeScreen(navController = navController)}
-            composable("schedule") {ScheduleScreen(navController = navController)}
-            composable("exercises") {ExerciseScreen(navController = navController)}
+            composable("home") {
+                BackHandler(true) {}
+                HomeScreen(navController = navController)
+            }
+            composable("schedule") {
+                BackHandler(true) {}
+                ScheduleScreen(navController = navController)
+            }
+            composable("exercises") {
+                BackHandler(true) {}
+                ExerciseScreen(navController = navController)
+            }
             composable("createExercise") { CreateExerciseScreen(navController = navController) }
             composable(
                 route = "editExercise/{exerciseId}",
