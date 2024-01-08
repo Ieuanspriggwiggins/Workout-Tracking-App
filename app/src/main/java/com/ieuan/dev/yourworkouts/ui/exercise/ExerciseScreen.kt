@@ -6,10 +6,15 @@
 package com.ieuan.dev.yourworkouts.ui.exercise
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -61,29 +66,27 @@ fun ExerciseScreen(
                 )
             }
         }
-        Column(
+
+        LazyColumn(
             modifier = Modifier
                 .padding(start = 12.dp, end = 12.dp)
-                .verticalScroll(state = rememberScrollState())
+                .fillMaxHeight()
         ){
-            Column(
-                modifier = Modifier.padding(bottom = 42.dp)
-            ){
-                //Loop through each exercise in the list and display the card for that
-                //exercise, passing the exercise as a parameter
-                exerciseList.forEach{exercise ->
-                    ExerciseCard(
-                        exercise = exercise,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 32.dp)
-                    ) {
-                        val id: Int = exercise.id
-                        navController.navigate("editExercise/$id")
-                    }
+            items(exerciseList){ exercise ->
+                ExerciseCard(
+                    exercise = exercise,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 32.dp)
+                ) {
+                    val id: Int = exercise.id
+                    navController.navigate("editExercise/$id")
                 }
             }
-
+            //Adds some extra space so the FAB icon isn't in the way of any information on the exercise cards.
+            item(){
+                Spacer(modifier = Modifier.padding(bottom = 50.dp))
+            }
         }
     }
 }

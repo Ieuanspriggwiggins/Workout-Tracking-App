@@ -6,12 +6,17 @@
 package com.ieuan.dev.yourworkouts.ui.schedule
 
 import android.util.Log
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -53,12 +58,12 @@ fun AddExerciseToScheduleScreen(
             navController.popBackStack()
         }
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 14.dp, end = 14.dp)
-        ) {
-            list.forEach{exercise ->
+        ){
+            items(list) { exercise ->
                 var checked by remember {mutableStateOf(false)}
                 var isDialogOpened by remember {mutableStateOf(false)}
 
